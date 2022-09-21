@@ -1,12 +1,12 @@
-#ifndef STD_WINDOW_H
-#define STD_WINDOW_H
+#ifndef IOSTREAM_WINDOW_H
+#define IOSTREAM_WINDOW_H
 
 #include <string>
 #include "Window.hpp"
 
 namespace Draw
 {
-    class StdWindow : public Window
+    class IostreamWindow : public Window
     {
     private:
         int hight;
@@ -19,8 +19,8 @@ namespace Draw
             "Exit",
         };
     public:
-        StdWindow() {};
-        ~StdWindow() {};
+        IostreamWindow() {};
+        ~IostreamWindow() {};
     
     public:
         void menu(unsigned &choice);

@@ -3,11 +3,11 @@
 
 #include "Loop.hpp"
 
-class StdLoop : public Loop
+class StandardLoop : public Loop
 {
 public:
-    StdLoop(Player *player);
-    ~StdLoop();
+    StandardLoop(Player *player);
+    ~StandardLoop();
 
 public:
     void menu(Draw::Window *win, Listen::Event *event);

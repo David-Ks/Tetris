@@ -1,10 +1,10 @@
-#include "StdLoop.hpp"
+#include "StandardLoop.hpp"
 
-StdLoop::StdLoop(Player *player) : Loop(player) {}
+StandardLoop::StandardLoop(Player *player) : Loop(player) {}
 
-StdLoop::~StdLoop() {}
+StandardLoop::~StandardLoop() {}
 
-void StdLoop::menu(Draw::Window *win, Listen::Event *event)
+void StandardLoop::menu(Draw::Window *win, Listen::Event *event)
 {
     unsigned choice = 0;
 
@@ -24,7 +24,7 @@ void StdLoop::menu(Draw::Window *win, Listen::Event *event)
     }
 }
 
-void StdLoop::game(Draw::Window *win, Listen::Event *event)
+void StandardLoop::game(Draw::Window *win, Listen::Event *event)
 {
     unsigned choice = 0;
     unsigned autoDropDown = 661;

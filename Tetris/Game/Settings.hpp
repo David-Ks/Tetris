@@ -12,10 +12,10 @@
 
 // Graphics lib
 #include "Graphics/NcursesWindow.hpp"
-#include "Graphics/StdWindow.hpp"
+#include "Graphics/IostreamWindow.hpp"
 
 // Loop lib
-#include "GameLoop/StdLoop.hpp"
+#include "GameLoop/StandardLoop.hpp"
 
 // Events lib
 #include "Events/MenuEvent.hpp"
@@ -42,7 +42,7 @@ namespace Settings
     using CustomPlayer = StandardPlayer;
     using CustomBoard = Map::StandardBoard;
     using CustomWindow = Draw::NcursesWindow;
-    using CustomLoop = StdLoop;
+    using CustomLoop = StandardLoop;
 } // namespace Settings
 
 #endif

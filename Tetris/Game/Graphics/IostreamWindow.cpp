@@ -1,7 +1,7 @@
-#include "StdWindow.hpp"
+#include "IostreamWindow.hpp"
 #include <iostream>
 
-void Draw::StdWindow::menu(unsigned &choice)
+void Draw::IostreamWindow::menu(unsigned &choice)
 {
     if (choice > menuItemsCount)
         choice = menuItemsCount;
@@ -13,7 +13,7 @@ void Draw::StdWindow::menu(unsigned &choice)
     }
 }
 
-void Draw::StdWindow::game(Map::Board *board)
+void Draw::IostreamWindow::game(Map::Board *board)
 {
     map_t map = board->map;
     for (int i = 0; i < Settings::height - 1; i++)
@@ -32,12 +32,12 @@ void Draw::StdWindow::game(Map::Board *board)
         std::cout << "T";
 }
 
-void Draw::StdWindow::winClear()
+void Draw::IostreamWindow::winClear()
 {
     std::cout << "Just clean window ;)\n";
 }
 
-int Draw::StdWindow::input()
+int Draw::IostreamWindow::input()
 {
     int action;
     std::cin >> action;
