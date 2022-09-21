@@ -2,7 +2,7 @@
 #define IOSTREAM_WINDOW_H
 
 #include <string>
-#include "Window.hpp"
+#include <iostream>
 
 namespace Draw
 {

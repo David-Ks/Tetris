@@ -12,8 +12,7 @@ namespace Map
         ~StandardBoard();
     
     public:
-        static void specialQueueForIndexes(int *arr, int size);
-
+        void dropNotActiveFigures(std::vector<int>fullLines);
         void lineClean(std::vector<int>fullLines);
         void lineCheck();
         void update();
