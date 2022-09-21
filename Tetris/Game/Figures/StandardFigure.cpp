@@ -3,10 +3,10 @@
 
 void StandardFigure::init()
 {
-    int typeNumber = rand() % 5;
+    int typeNumber = rand() % FigureStandardTypes::typesCount;
     Position pos;
 
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < FigureStandardTypes::typesBlocksCount; i++)
     {
         blocks[i] = new Block;
         pos.x = FigureStandardTypes::types[typeNumber][i][0];
@@ -14,10 +14,7 @@ void StandardFigure::init()
         blocks[i]->setPos(pos);
     }
 
-    if (typeNumber == 3)
-        isRotatable = false;
-    else
-        isRotatable = true;
+    isRotatable = true;
 }
 
 void StandardFigure::setPos(Position pos)
