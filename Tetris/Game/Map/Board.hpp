@@ -50,6 +50,22 @@ namespace Map
         {
             this->gameOver = gameOver;
         }
+
+        void theEndOfGame()
+        {
+            for (auto &figure : figures)
+            {
+                if (!figure) continue;
+                for (auto &block : figure->blocks)
+                {
+                    if (!block) continue;
+                    delete block;
+                    block = 0;
+                }
+                delete figure;
+                figure = 0;
+            }
+        }
     };
 } // namespace Map
 

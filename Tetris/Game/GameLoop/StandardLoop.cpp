@@ -40,6 +40,9 @@ void StandardLoop::game(Draw::Window *win, Listen::Event *event)
         win->game(map);
         event->handler(choice, map);
         map->update();
+
+        if (map->getGameOver()) break;
+        
         event->handler(autoDropDown, map);
         map->update();
 

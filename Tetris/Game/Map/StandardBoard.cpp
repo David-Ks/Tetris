@@ -84,18 +84,28 @@ void Map::StandardBoard::lineCheck()
         Position figurePos = figures[figures.size() - 2]->getPos();
 
         blck.insert(figurePos.x + blockPos.x);
+
+        if (figurePos.x + blockPos.x <= 4)
+            setGameOver(true);
     }
 
-    for (auto &pos : blck)
+    if (!gameOver)
     {
-        if (map[pos] == vec)
+        for (auto &pos : blck)
         {
-            fullLines.push_back(pos);
+            if (map[pos] == vec)
+            {
+                fullLines.push_back(pos);
+            }
         }
-    }
 
-    if (fullLines.size() != 0)
-        lineClean(fullLines);
+        if (fullLines.size() != 0)
+            lineClean(fullLines);
+    }
+    else
+    {
+        theEndOfGame();
+    }
 }
 
 void Map::StandardBoard::lineClean(std::vector<int> fullLines)
@@ -113,7 +123,6 @@ void Map::StandardBoard::lineClean(std::vector<int> fullLines)
                 count++;
                 continue;
             }
-            // int x = figure->getPos().x + block->getPos().x; Wrong answer!!!
 
             if (std::find(fullLines.begin(), fullLines.end(),
                           figure->getPos().x + block->getPos().x) != fullLines.end())
@@ -139,7 +148,7 @@ void Map::StandardBoard::dropNotActiveFigures(std::vector<int> fullLines)
 {
     int min = *std::min_element(fullLines.begin(), fullLines.end());
 
-    for (auto& figure : figures)
+    for (auto &figure : figures)
     {
         if (!figure)
             continue;
