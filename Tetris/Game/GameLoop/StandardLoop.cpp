@@ -39,9 +39,7 @@ void StandardLoop::game(Draw::Window *win, Listen::Event *event)
         win->winClear();
         win->game(map);
         event->handler(choice, map);
-
         map->update();
-
         event->handler(autoDropDown, map);
         map->update();
 

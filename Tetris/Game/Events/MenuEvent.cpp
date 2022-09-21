@@ -1,3 +1,5 @@
+#include "MenuEvent.hpp"
+
 void Listen::MenuEvent::handler(unsigned &choice, Map::Board *map)
 {
     int x = this->get();
