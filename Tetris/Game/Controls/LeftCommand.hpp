@@ -8,7 +8,7 @@ namespace Action
     class LeftCommand : public Command
     {
     public:
-        LeftCommand(Figure *figure) : Command(figure) {}
+        LeftCommand(Object::Figure *figure) : Command(figure) {}
         ~LeftCommand() {}
 
     public:

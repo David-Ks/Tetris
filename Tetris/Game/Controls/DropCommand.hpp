@@ -8,7 +8,7 @@ namespace Action
     class DropCommand : public Command
     {
     public:
-        DropCommand(Figure *figure) : Command(figure) {}
+        DropCommand(Object::Figure *figure) : Command(figure) {}
         ~DropCommand() {}
 
     public:

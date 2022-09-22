@@ -8,7 +8,7 @@ namespace Action
     class RotateCommand : public Command
     {
     public:
-        RotateCommand(Figure *figure) : Command(figure) {}
+        RotateCommand(Object::Figure *figure) : Command(figure) {}
         ~RotateCommand() {}
 
     public:

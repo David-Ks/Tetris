@@ -1,13 +1,14 @@
 #include "Settings.hpp"
 
-#include "Figures/StandardFigure.cpp"
+#include "Players/StandardPlayer.cpp"
+
+#include "Figures/Figure.cpp"
 #include "Map/StandardBoard.cpp"
 #include "Graphics/NcursesWindow.cpp"
 #include "Graphics/IostreamWindow.cpp"
 #include "GameLoop/StandardLoop.cpp"
-#include "Players/StandardPlayer.cpp"
-#include "Events/GameEvent.cpp"
 #include "Events/MenuEvent.cpp"
+#include "Events/GameEvent.cpp"
 
 class Tetris
 {

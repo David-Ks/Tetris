@@ -1,11 +1,13 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+#include <vector>
+
 // Player lib
 #include "Players/StandardPlayer.hpp"
 
 // Figures lib
-#include "Figures/StandardFigure.hpp"
+#include "Figures/Figure.hpp"
 
 // Map lib
 #include "Map/StandardBoard.hpp"
@@ -34,11 +36,21 @@
 
 namespace Settings
 {
-    const int height = 30;
-    const int weidth = 12;
+    typedef std::vector<std::vector<std::vector<int>>> typeList; // 3D
+
+    const static int height = 30;
+    const static int weidth = 12;
+
+    const static typeList types = {
+        {{1, 0}, {1, 1}, {1, 2}, {1, 3}},
+        {{1, 1}, {2, 1}, {2, 2}, {2, 3}},
+        {{2, 1}, {2, 2}, {2, 3}, {1, 3}},
+        {{1, 1}, {2, 1}, {2, 2}, {3, 2}},
+        {{3, 1}, {2, 1}, {2, 2}, {1, 2}},
+        {{1, 1}, {1, 2}, {2, 2}, {2, 1}},
+        {{1, 2}, {2, 1}, {2, 2}, {2, 3}}};
 
     // Set your cutsom classes
-    using CustomFigure = StandardFigure;
     using CustomPlayer = StandardPlayer;
     using CustomBoard = Map::StandardBoard;
     using CustomWindow = Draw::NcursesWindow;

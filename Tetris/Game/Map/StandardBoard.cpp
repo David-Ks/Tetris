@@ -50,18 +50,17 @@ void Map::StandardBoard::clean()
 
 void Map::StandardBoard::addFigure()
 {
-    Figure *newFigure = new Settings::CustomFigure;
+    Object::Figure *newFigure = new Object::Figure;
 
     Position pos;
     pos.x = 0;
     pos.y = (Settings::weidth - 3) / 2; // Center
 
-    newFigure->init();
     newFigure->setPos(pos);
 
     if (figures.size() != 0)
     {
-        Figure *lastFigure = figures[figures.size() - 1];
+        Object::Figure *lastFigure = figures[figures.size() - 1];
 
         for (auto &block : lastFigure->blocks)
         {

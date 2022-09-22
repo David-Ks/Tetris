@@ -8,10 +8,10 @@ namespace Action
     class Command
     {
     protected:
-        Figure *figure;
+        Object::Figure *figure;
 
     public:
-        Command(Figure *figure) { this->figure = figure; }
+        Command(Object::Figure *figure) { this->figure = figure; }
         virtual ~Command() {}
 
     public:

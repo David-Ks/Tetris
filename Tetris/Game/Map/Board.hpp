@@ -5,7 +5,7 @@
 #include <vector>
 
 typedef std::vector<std::vector<char>> map_t;
-typedef std::vector<Figure *> figureList;
+typedef std::vector<Object::Figure *> figureList;
 
 namespace Map
 {
