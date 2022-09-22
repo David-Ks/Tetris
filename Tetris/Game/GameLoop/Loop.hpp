@@ -15,8 +15,8 @@ public:
     ~Loop();
 
 public:
-    void menu(Draw::Window *win, Listen::Event *event);
-    void game(Draw::Window *win, Listen::Event *event);
+    void menu(Draw::Window *window, Listen::Event *event);
+    void game(Draw::Window *window, Listen::Event *event);
 };
 
 #endif

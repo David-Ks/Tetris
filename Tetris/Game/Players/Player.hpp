@@ -10,15 +10,16 @@ protected:
     std::string name;
 
 public:
-    Player() { score = 0; name = "Anonymous"; }
+    Player(std::string name = "Anonymous") { score = 0; this->name = name; }
     virtual ~Player() {}
 
 public:
-    virtual int getScore() = 0;
-    virtual void setScore(int score) = 0;
+    virtual void addScore(int score) = 0;
 
-    virtual std::string getName() = 0;
-    virtual void setName(std::string name) = 0;
+public:
+    void setScore(int score) { this->score = score; }
+    int getScore() { return score; }
+    std::string getName() { return this->name; }
 };
 
 #endif

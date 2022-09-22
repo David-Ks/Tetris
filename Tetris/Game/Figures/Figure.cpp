@@ -4,14 +4,14 @@
 Object::Figure::Figure()
 {
     int typeNumber = rand() % Settings::types.size();
-    Position pos;
+    Position position;
 
     for (int i = 0; i < Settings::types[typeNumber].size(); i++)
     {
         blocks[i] = new Block;
-        pos.x = Settings::types[typeNumber][i][0];
-        pos.y = Settings::types[typeNumber][i][1];
-        blocks[i]->setPos(pos);
+        position.x = Settings::types[typeNumber][i][0];
+        position.y = Settings::types[typeNumber][i][1];
+        blocks[i]->setPos(position);
     }
 
     isRotatable = true;
@@ -19,7 +19,7 @@ Object::Figure::Figure()
 
 Object::Figure::~Figure() {}
 
-bool Object::Figure::isOwnBlock(int posX, int poxY)
+bool Object::Figure::isOwnBlock(int x, int y)
 {
     for (auto &block : blocks)
     {
@@ -28,18 +28,18 @@ bool Object::Figure::isOwnBlock(int posX, int poxY)
 
         Position blockPos = block->getPos();
 
-        if (blockPos.x + pos.x == posX && blockPos.y + pos.y == poxY)
+        if (blockPos.x + position.x == x && blockPos.y + position.y == y)
             return true;
     }
     return false;
 }
 
-void Object::Figure::setPos(Position pos)
+void Object::Figure::setPos(Position position)
 {
-    this->pos = pos;
+    this->position = position;
 }
 
 Position Object::Figure::getPos()
 {
-    return pos;
+    return position;
 }

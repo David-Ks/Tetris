@@ -14,7 +14,7 @@ void Listen::GameEvent::handler(unsigned &choice, Map::Board *map)
     if (choice == 661) // auto down
         x = 2;
     else
-        x = this->get();
+        x = this->getKey();
 
     switch (x)
     {

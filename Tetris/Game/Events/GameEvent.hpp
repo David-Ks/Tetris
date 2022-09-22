@@ -8,7 +8,7 @@ namespace Listen
     class GameEvent : public Event
     {
     public:
-        GameEvent(Draw::Window *win) : Event(win) {}
+        GameEvent(Draw::Window *window) : Event(window) {}
         ~GameEvent() {}
 
     public:

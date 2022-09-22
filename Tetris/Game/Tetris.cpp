@@ -2,6 +2,7 @@
 
 #include "Players/StandardPlayer.cpp"
 
+// Undefined reference Error
 #include "Figures/Figure.cpp"
 #include "Map/StandardBoard.cpp"
 #include "Graphics/NcursesWindow.cpp"
@@ -14,7 +15,6 @@ class Tetris
 {
 private:
     Draw::Window *window;
-    Map::Board *map;
     Player *player;
     Loop *loop;
 
@@ -29,7 +29,7 @@ public:
     {
         delete window;
         delete loop;
-        delete map;
+        delete player;
     }
 
 public:

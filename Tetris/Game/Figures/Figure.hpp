@@ -11,7 +11,7 @@ namespace Object
     {
     public:
         Block *blocks[4];
-        Position pos;
+        Position position;
         bool isRotatable;
 
     public:
@@ -19,8 +19,8 @@ namespace Object
         ~Figure();
 
     public:
-        bool isOwnBlock(int posX, int poxY);
-        void setPos(Position pos);
+        bool isOwnBlock(int x, int y);
+        void setPos(Position position);
         Position getPos();
     };
 

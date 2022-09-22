@@ -2,7 +2,7 @@
 
 Draw::NcursesWindow::NcursesWindow()
 {
-    this->w = initscr();
+    this->window = initscr();
     curs_set(0);
     keypad(stdscr, true);
     getmaxyx(stdscr, hight, weidth);

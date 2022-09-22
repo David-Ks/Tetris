@@ -8,7 +8,7 @@ namespace Listen
     class MenuEvent : public Event
     {
     public:
-        MenuEvent(Draw::Window *win) : Event(win) {}
+        MenuEvent(Draw::Window *window) : Event(window) {}
         ~MenuEvent() {}
 
     public:

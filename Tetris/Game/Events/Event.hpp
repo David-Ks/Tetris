@@ -8,20 +8,20 @@ namespace Listen
     class Event
     {
     private:
-        Draw::Window *win;
+        Draw::Window *window;
 
     public:
-        Event(Draw::Window *win)
+        Event(Draw::Window *window)
         {
-            this->win = win;
+            this->window = window;
         }
 
         virtual ~Event() {}
 
     public:
-        int get()
+        int getKey()
         {
-            return win->input();
+            return window->input();
         }
 
         virtual void handler(unsigned &choice, Map::Board *map = 0) = 0;

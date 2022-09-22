@@ -7,27 +7,27 @@ Loop::Loop(Player *player)
 
 Loop::~Loop() {}
 
-void Loop::menu(Draw::Window *win, Listen::Event *event)
+void Loop::menu(Draw::Window *window, Listen::Event *event)
 {
     unsigned choice = 0;
 
     while (true)
     {
-        win->winClear();
-        win->menu(choice);
+        window->winClear();
+        window->menu(choice);
         event->handler(choice);
 
         if (choice == 666) // exit code
             break;
         else if (choice == 777) // Play code
         {
-            Listen::Event *gameEvent = new Listen::GameEvent(win);
-            game(win, gameEvent);
+            Listen::Event *gameEvent = new Listen::GameEvent(window);
+            game(window, gameEvent);
         }
     }
 }
 
-void Loop::game(Draw::Window *win, Listen::Event *event)
+void Loop::game(Draw::Window *window, Listen::Event *event)
 {
     unsigned choice = 0;
     unsigned autoDropDown = 661;
@@ -35,12 +35,12 @@ void Loop::game(Draw::Window *win, Listen::Event *event)
     map = new Settings::CustomBoard(player);
     map->addFigure();
     map->setGameOver(false);
-    win->winClear();
+    window->winClear();
 
     while (!map->getGameOver())
     {
-        win->winClear();
-        win->game(map);
+        window->winClear();
+        window->game(map);
         event->handler(choice, map);
         map->update();
 
@@ -53,4 +53,6 @@ void Loop::game(Draw::Window *win, Listen::Event *event)
         if (choice == 666) // exit code
             break;
     }
+
+    // player->saveScoreIfRecord() and set 0
 }

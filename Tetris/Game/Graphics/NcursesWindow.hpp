@@ -13,7 +13,7 @@ namespace Draw
         int hight;
         int weidth;
 
-        WINDOW *w;
+        WINDOW *window;
 
         static const int menuItemsCount = 3;
         const std::string menuItems[menuItemsCount] = {

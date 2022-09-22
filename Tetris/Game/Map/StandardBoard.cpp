@@ -139,7 +139,7 @@ void Map::StandardBoard::lineClean(std::vector<int> fullLines)
         }
     }
 
-    player->setScore(fullLines.size());
+    player->addScore(fullLines.size());
     dropNotActiveFigures(fullLines);
 }
 

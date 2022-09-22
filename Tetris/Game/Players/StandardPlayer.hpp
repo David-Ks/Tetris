@@ -10,11 +10,7 @@ public:
     ~StandardPlayer() {}
 
 public:
-    int getScore();
-    void setScore(int score);
-
-    std::string getName();
-    void setName(std::string name);
+    void addScore(int score);
 };
 
 #endif

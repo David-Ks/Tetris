@@ -2,8 +2,7 @@
 
 void Listen::MenuEvent::handler(unsigned &choice, Map::Board *map)
 {
-    int x = this->get();
-    switch (x)
+    switch (this->getKey())
     {
     case 3: // Up
         if (choice)
