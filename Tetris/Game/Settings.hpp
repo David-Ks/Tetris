@@ -16,23 +16,12 @@
 #include "Graphics/NcursesWindow.hpp"
 #include "Graphics/IostreamWindow.hpp"
 
-// Loop lib
-#include "GameLoop/StandardLoop.hpp"
-
 // Events lib
 #include "Events/MenuEvent.hpp"
 #include "Events/GameEvent.hpp"
 
-
-// Must be like this
-// #include "Figures/StandardFigure.cpp"
-// #include "Map/StandardBoard.cpp"
-// #include "Graphics/NcursesWindow.cpp"
-// #include "Graphics/StdWindow.cpp"
-// #include "GameLoop/StdLoop.cpp"
-// #include "Players/StandardPlayer.cpp"
-// #include "Events/GameEvent.cpp"
-// #include "Events/MenuEvent.cpp"
+// Loop lib
+#include "GameLoop/Loop.hpp"
 
 namespace Settings
 {
@@ -54,7 +43,6 @@ namespace Settings
     using CustomPlayer = StandardPlayer;
     using CustomBoard = Map::StandardBoard;
     using CustomWindow = Draw::NcursesWindow;
-    using CustomLoop = StandardLoop;
 } // namespace Settings
 
 #endif

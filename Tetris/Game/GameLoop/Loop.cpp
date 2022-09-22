@@ -1,10 +1,14 @@
-#include "StandardLoop.hpp"
+#include "../Settings.hpp"
+#include "Loop.hpp"
 
-StandardLoop::StandardLoop(Player *player) : Loop(player) {}
+Loop::Loop(Player *player)
+{
+    this->player = player;
+}
 
-StandardLoop::~StandardLoop() {}
+Loop::~Loop() {}
 
-void StandardLoop::menu(Draw::Window *win, Listen::Event *event)
+void Loop::menu(Draw::Window *win, Listen::Event *event)
 {
     unsigned choice = 0;
 
@@ -24,7 +28,7 @@ void StandardLoop::menu(Draw::Window *win, Listen::Event *event)
     }
 }
 
-void StandardLoop::game(Draw::Window *win, Listen::Event *event)
+void Loop::game(Draw::Window *win, Listen::Event *event)
 {
     unsigned choice = 0;
     unsigned autoDropDown = 661;
@@ -41,8 +45,9 @@ void StandardLoop::game(Draw::Window *win, Listen::Event *event)
         event->handler(choice, map);
         map->update();
 
-        if (map->getGameOver()) break;
-        
+        if (map->getGameOver())
+            break;
+
         event->handler(autoDropDown, map);
         map->update();
 

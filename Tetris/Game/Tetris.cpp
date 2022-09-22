@@ -6,7 +6,7 @@
 #include "Map/StandardBoard.cpp"
 #include "Graphics/NcursesWindow.cpp"
 #include "Graphics/IostreamWindow.cpp"
-#include "GameLoop/StandardLoop.cpp"
+#include "GameLoop/Loop.cpp"
 #include "Events/MenuEvent.cpp"
 #include "Events/GameEvent.cpp"
 
@@ -23,7 +23,7 @@ public:
     {
         window = new Settings::CustomWindow;
         player = new Settings::CustomPlayer;
-        loop = new Settings::CustomLoop(player);
+        loop = new Loop(player);
     }
     ~Tetris()
     {
