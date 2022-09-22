@@ -1,8 +1,8 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include "../Settings.hpp"
 #include <vector>
+#include "../Figures/Figure.hpp"
 
 typedef std::vector<std::vector<char>> map_t;
 typedef std::vector<Object::Figure *> figureList;

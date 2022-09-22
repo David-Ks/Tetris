@@ -1,6 +1,4 @@
 #include <cstdlib>
-
-#include "../Settings.hpp"
 #include "Figure.hpp"
 
 Object::Figure::Figure()

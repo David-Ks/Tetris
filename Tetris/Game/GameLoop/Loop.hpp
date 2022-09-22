@@ -1,6 +1,10 @@
 #ifndef LOOP_H
 #define LOOP_H
 
+#include "../Settings.hpp"
+#include "../Events/MenuEvent.hpp"
+#include "../Events/GameEvent.hpp"
+
 class Loop
 {
 private:

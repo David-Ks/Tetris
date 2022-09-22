@@ -1,4 +1,3 @@
-#include "../Settings.hpp"
 #include "Loop.hpp"
 
 Loop::Loop(Player *player)

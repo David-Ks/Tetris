@@ -6,22 +6,12 @@
 // Player lib
 #include "Players/StandardPlayer.hpp"
 
-// Figures lib
-#include "Figures/Figure.hpp"
-
 // Map lib
 #include "Map/StandardBoard.hpp"
 
 // Graphics lib
 #include "Graphics/NcursesWindow.hpp"
 #include "Graphics/IostreamWindow.hpp"
-
-// Events lib
-#include "Events/MenuEvent.hpp"
-#include "Events/GameEvent.hpp"
-
-// Loop lib
-#include "GameLoop/Loop.hpp"
 
 namespace Settings
 {
