@@ -1,6 +1,6 @@
 #include "MenuEvent.hpp"
 
-void Listen::MenuEvent::handler(unsigned &choice, Map::Board *map)
+void Listen::MenuEvent::handler(unsigned &choice)
 {
     switch (this->getKey())
     {

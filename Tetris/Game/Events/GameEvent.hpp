@@ -8,11 +8,11 @@ namespace Listen
     class GameEvent : public Event
     {
     public:
-        GameEvent(Draw::Window *window) : Event(window) {}
+        GameEvent() {}
         ~GameEvent() {}
 
     public:
-        void handler(unsigned &choice, Map::Board *map);
+        void handler(unsigned &choice);
     };
 } // namespace Listen
 

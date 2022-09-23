@@ -23,10 +23,9 @@ namespace Draw
         ~IostreamWindow() {};
     
     public:
-        void menu(unsigned &choice);
-        void game(Map::Board *board);
-
-        void winClear();
+        void drawMenu(unsigned &choice);
+        void drawGame();
+        void clean();
         int input();
     };
 } // namespace Draw

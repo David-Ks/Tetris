@@ -1,7 +1,6 @@
 #ifndef FIGURE_H
 #define FIGURE_H
 
-#include "../Settings.hpp"
 #include "items/Block.cpp"
 
 

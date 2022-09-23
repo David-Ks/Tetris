@@ -8,11 +8,11 @@ namespace Listen
     class MenuEvent : public Event
     {
     public:
-        MenuEvent(Draw::Window *window) : Event(window) {}
+        MenuEvent() {}
         ~MenuEvent() {}
 
     public:
-        void handler(unsigned &choice, Map::Board *map);
+        void handler(unsigned &choice);
     };
 } // namespace Listen
 

@@ -14,18 +14,13 @@ namespace Map
     protected:
         bool gameOver;
         int *linesScore;
-        Player *player;
 
     public:
         figureList figures;
         map_t map;
 
     public:
-        Board(Player *player)
-        {
-            this->player = player;
-            gameOver = false;
-        }
+        Board() : gameOver(false) {}
         virtual ~Board() {}
 
     public:
@@ -36,11 +31,6 @@ namespace Map
         virtual void addFigure() = 0;
 
     public:
-        Player *getPlayer()
-        {
-            return player;
-        }
-
         bool getGameOver()
         {
             return gameOver;

@@ -3,7 +3,7 @@
 #include <set>
 #include <iostream>
 
-Map::StandardBoard::StandardBoard(Player *player) : Board(player)
+Map::StandardBoard::StandardBoard()
 {
     map = map_t(Settings::height, std::vector<char>(Settings::weidth, 0));
     linesScore = new int[Settings::height - 3];
@@ -139,7 +139,7 @@ void Map::StandardBoard::lineClean(std::vector<int> fullLines)
         }
     }
 
-    player->addScore(fullLines.size());
+    Game::player()->addScore(fullLines.size());
     dropNotActiveFigures(fullLines);
 }
 

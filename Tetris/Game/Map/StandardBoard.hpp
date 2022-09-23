@@ -8,7 +8,7 @@ namespace Map
     class StandardBoard : public Board
     {
     public:
-        StandardBoard(Player *player);
+        StandardBoard();
         ~StandardBoard();
     
     public:

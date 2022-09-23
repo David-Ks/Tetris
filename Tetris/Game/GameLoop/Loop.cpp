@@ -1,54 +1,46 @@
 #include "Loop.hpp"
 
-Loop::Loop(Player *player)
-{
-    this->player = player;
-}
-
-Loop::~Loop() {}
-
-void Loop::menu(Draw::Window *window, Listen::Event *event)
+void Loop::menu(Listen::Event *event)
 {
     unsigned choice = 0;
 
     while (true)
     {
-        window->winClear();
-        window->menu(choice);
+        Game::window()->clean();
+        Game::window()->drawMenu(choice);
         event->handler(choice);
 
         if (choice == 666) // exit code
             break;
         else if (choice == 777) // Play code
         {
-            Listen::Event *gameEvent = new Listen::GameEvent(window);
-            game(window, gameEvent);
+            Listen::Event *gameEvent = new Listen::GameEvent();
+            game(gameEvent);
         }
     }
 }
 
-void Loop::game(Draw::Window *window, Listen::Event *event)
+void Loop::game(Listen::Event *event)
 {
     unsigned choice = 0;
     unsigned autoDropDown = 661;
 
-    map = new Settings::CustomBoard(player);
-    map->addFigure();
-    map->setGameOver(false);
-    window->winClear();
+    Game::map()->addFigure();
+    Game::map()->setGameOver(false);
+    Game::window()->clean();
 
-    while (!map->getGameOver())
+    while (!Game::map()->getGameOver())
     {
-        window->winClear();
-        window->game(map);
-        event->handler(choice, map);
-        map->update();
+        Game::window()->clean();
+        Game::window()->drawGame();
+        event->handler(choice);
+        Game::map()->update();
 
-        if (map->getGameOver())
+        if (Game::map()->getGameOver())
             break;
 
-        event->handler(autoDropDown, map);
-        map->update();
+        event->handler(autoDropDown);
+        Game::map()->update();
 
         if (choice == 666) // exit code
             break;

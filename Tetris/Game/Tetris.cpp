@@ -1,4 +1,5 @@
-#include "Settings.hpp"
+#include "Settings.cpp"
+#include "Game.cpp"
 
 #include "Players/StandardPlayer.cpp"
 
@@ -13,31 +14,19 @@
 
 class Tetris
 {
-private:
-    Draw::Window *window;
-    Player *player;
-    Loop *loop;
-
 public:
-    Tetris()
-    {
-        window = new Settings::CustomWindow;
-        player = new Settings::CustomPlayer;
-        loop = new Loop(player);
-    }
-    ~Tetris()
-    {
-        delete window;
-        delete loop;
-        delete player;
-    }
+    Tetris() {}
+    ~Tetris() {}
 
 public:
     void run()
     {
-        Listen::MenuEvent *event = new Listen::MenuEvent(window);
-        loop->menu(window, event);
+        Loop *loop = new Loop;
+
+        Listen::MenuEvent *event = new Listen::MenuEvent;
+        loop->menu(event);
 
         delete event;
+        delete loop;
     }
 };

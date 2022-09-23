@@ -13,7 +13,7 @@ Draw::NcursesWindow::~NcursesWindow()
     endwin();
 }
 
-void Draw::NcursesWindow::menu(unsigned &choice)
+void Draw::NcursesWindow::drawMenu(unsigned &choice)
 {
     int centerHight = hight / 2 - menuItemsCount;
     int centerWeidth = weidth / 2 - 10; // 10-is menu items max length
@@ -34,9 +34,9 @@ void Draw::NcursesWindow::menu(unsigned &choice)
     }
 }
 
-void Draw::NcursesWindow::game(Map::Board *board)
+void Draw::NcursesWindow::drawGame()
 {
-    map_t map = board->map;
+    map_t map = Game::map()->map;
     int centerHight = hight / 2 - Settings::height + 10;
     int centerWeidth = weidth / 2 - Settings::weidth; // 10-is menu items max length
 
@@ -58,11 +58,11 @@ void Draw::NcursesWindow::game(Map::Board *board)
         printw("T");
 
     printw("\n");
-    mvprintw(centerHight + Settings::height, centerWeidth, "Player: %s\n", board->getPlayer()->getName().c_str());
-    mvprintw(centerHight + Settings::height + 1, centerWeidth,"Score: %d\n", board->getPlayer()->getScore());
+    mvprintw(centerHight + Settings::height, centerWeidth, "Player: %s\n", Game::player()->getName().c_str());
+    mvprintw(centerHight + Settings::height + 1, centerWeidth,"Score: %d\n", Game::player()->getScore());
 }
 
-void Draw::NcursesWindow::winClear()
+void Draw::NcursesWindow::clean()
 {
     clear();
     refresh();

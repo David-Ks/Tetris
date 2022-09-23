@@ -1,22 +1,21 @@
 #ifndef LOOP_H
 #define LOOP_H
 
-#include "../Settings.hpp"
 #include "../Events/MenuEvent.hpp"
 #include "../Events/GameEvent.hpp"
 
+#include <set>
+#include <map>
+
 class Loop
 {
-private:
-    Map::Board *map;
-    Player * player;
 public:
-    Loop(Player *player);
-    ~Loop();
+    Loop() {}
+    ~Loop() {}
 
 public:
-    void menu(Draw::Window *window, Listen::Event *event);
-    void game(Draw::Window *window, Listen::Event *event);
+    void menu(Listen::Event *event);
+    void game(Listen::Event *event);
 };
 
 #endif
