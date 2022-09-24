@@ -16,7 +16,12 @@ class Tetris
 {
 public:
     Tetris() {}
-    ~Tetris() {}
+    ~Tetris()
+    {
+        delete Game::window();
+        delete Game::player();
+        delete Game::map();
+    }
 
 public:
     void run()

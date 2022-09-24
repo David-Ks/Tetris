@@ -1,6 +1,3 @@
-#ifndef GAME_H
-#define GAME_H
-
 #include "Players/StandardPlayer.hpp"
 #include "Map/StandardBoard.hpp"
 #include "Graphics/NcursesWindow.hpp"
@@ -26,5 +23,3 @@ namespace Game
         return plyr;
     }
 } // namespace Game
-
-#endif
