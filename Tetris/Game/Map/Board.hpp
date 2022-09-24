@@ -14,6 +14,7 @@ namespace Map
     protected:
         bool gameOver;
         int *linesScore;
+        Object::Figure *nextFigure;
 
     public:
         figureList figures;
@@ -28,7 +29,12 @@ namespace Map
         virtual void lineCheck() = 0;
         virtual void update() = 0;
         virtual void clean() = 0;
+        virtual void theEndOfGame() = 0;
+
+    public:
         virtual void addFigure() = 0;
+        virtual void generateNextFigure() = 0;
+        virtual Object::Figure *getNextFigure() = 0;
 
     public:
         bool getGameOver()
@@ -39,22 +45,6 @@ namespace Map
         void setGameOver(bool gameOver)
         {
             this->gameOver = gameOver;
-        }
-
-        void theEndOfGame()
-        {
-            for (auto &figure : figures)
-            {
-                if (!figure) continue;
-                for (auto &block : figure->blocks)
-                {
-                    if (!block) continue;
-                    delete block;
-                    block = 0;
-                }
-                delete figure;
-                figure = 0;
-            }
         }
     };
 } // namespace Map

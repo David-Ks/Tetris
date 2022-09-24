@@ -27,7 +27,6 @@ void Loop::game(Listen::Event *event)
 
     Game::map()->addFigure();
     Game::map()->setGameOver(false);
-    Game::window()->clean();
 
     while (!Game::map()->getGameOver())
     {

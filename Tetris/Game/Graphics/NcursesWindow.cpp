@@ -58,8 +58,29 @@ void Draw::NcursesWindow::drawGame()
         printw("T");
 
     printw("\n");
+    
     mvprintw(centerHight + Settings::height, centerWeidth, "Player: %s\n", Game::player()->getName().c_str());
-    mvprintw(centerHight + Settings::height + 1, centerWeidth,"Score: %d\n", Game::player()->getScore());
+    mvprintw(centerHight + Settings::height + 1, centerWeidth, "Score: %d\n", Game::player()->getScore());
+
+    char nextFigure[4][4];
+    for (auto &block : Game::map()->getNextFigure()->blocks)
+    {
+        Position blockPos = block->getPos();
+        nextFigure[blockPos.x][blockPos.y] = '#';
+    }
+
+    mvprintw(centerHight + Settings::height + 3, centerWeidth, "Next Figure: \n");
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            if (nextFigure[i][j] != '#')
+                mvprintw(centerHight + Settings::height + i + 1, centerWeidth + 12 + j, " ");
+            else
+                mvprintw(centerHight + Settings::height + i + 1, centerWeidth + 12 + j, "%c", '#');
+        }
+        printw("\n");
+    }
 }
 
 void Draw::NcursesWindow::clean()

@@ -28,13 +28,6 @@ void Map::StandardBoard::update()
             Position blockPos = block->getPos();
             Position figurePos = figure->getPos();
 
-            // Crush defender
-            if (blockPos.x + figurePos.x >= Settings::height)
-            {
-                delete block;
-                block = 0;
-            }
-
             map[blockPos.x + figurePos.x][blockPos.y + figurePos.y] = '#';
         }
     }
@@ -48,33 +41,10 @@ void Map::StandardBoard::clean()
     }
 }
 
-void Map::StandardBoard::addFigure()
-{
-    Object::Figure *newFigure = new Object::Figure;
-
-    Position pos;
-    pos.x = 0;
-    pos.y = (Settings::weidth - 3) / 2; // Center
-
-    newFigure->setPos(pos);
-
-    if (figures.size() != 0)
-    {
-        Object::Figure *lastFigure = figures[figures.size() - 1];
-
-        for (auto &block : lastFigure->blocks)
-        {
-            linesScore[block->getPos().x + lastFigure->getPos().x]++;
-        }
-    }
-
-    figures.push_back(newFigure);
-}
-
 void Map::StandardBoard::lineCheck()
 {
     std::vector<int> fullLines;
-    std::set<int> blck; // blockListOptimaizer
+    std::set<int> setBlocks;
     std::vector<char> vec(Settings::weidth, '#');
 
     for (auto &block : figures[figures.size() - 2]->blocks)
@@ -82,7 +52,7 @@ void Map::StandardBoard::lineCheck()
         Position blockPos = block->getPos();
         Position figurePos = figures[figures.size() - 2]->getPos();
 
-        blck.insert(figurePos.x + blockPos.x);
+        setBlocks.insert(figurePos.x + blockPos.x);
 
         if (figurePos.x + blockPos.x <= 4)
             setGameOver(true);
@@ -90,11 +60,11 @@ void Map::StandardBoard::lineCheck()
 
     if (!gameOver)
     {
-        for (auto &pos : blck)
+        for (auto &position : setBlocks)
         {
-            if (map[pos] == vec)
+            if (map[position] == vec)
             {
-                fullLines.push_back(pos);
+                fullLines.push_back(position);
             }
         }
 
@@ -165,4 +135,62 @@ void Map::StandardBoard::dropNotActiveFigures(std::vector<int> fullLines)
             }
         }
     }
+}
+
+void Map::StandardBoard::theEndOfGame()
+{
+    for (auto &figure : figures)
+    {
+        if (!figure)
+            continue;
+        for (auto &block : figure->blocks)
+        {
+            if (!block)
+                continue;
+            delete block;
+            block = 0;
+        }
+        delete figure;
+        figure = 0;
+    }
+    figures.clear();
+}
+
+void Map::StandardBoard::addFigure()
+{
+    if (!getNextFigure())
+    {
+        generateNextFigure();
+    }
+
+    Object::Figure *newFigure = getNextFigure();
+
+    Position pos;
+    pos.x = 0;
+    pos.y = (Settings::weidth - 3) / 2; // Center
+
+    newFigure->setPos(pos);
+
+    if (figures.size() != 0)
+    {
+        Object::Figure *lastFigure = figures.back();
+
+        for (auto &block : lastFigure->blocks)
+        {
+            linesScore[block->getPos().x + lastFigure->getPos().x]++;
+        }
+    }
+
+    figures.push_back(newFigure);
+    generateNextFigure();
+}
+
+Object::Figure *Map::StandardBoard::getNextFigure()
+{
+    return nextFigure;
+}
+
+void Map::StandardBoard::generateNextFigure()
+{
+    nextFigure = new Object::Figure;
 }

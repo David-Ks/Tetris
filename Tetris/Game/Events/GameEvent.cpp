@@ -8,7 +8,7 @@ void Listen::GameEvent::handler(unsigned &choice)
 {
     Action::Command *action;
 
-    Object::Figure *activeFigure = Game::map()->figures[Game::map()->figures.size() - 1];
+    Object::Figure *activeFigure = Game::map()->figures.back();
 
     int x;
     if (choice == 661) // auto down

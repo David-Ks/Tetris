@@ -10,14 +10,19 @@ namespace Map
     public:
         StandardBoard();
         ~StandardBoard();
-    
+
     public:
-        void dropNotActiveFigures(std::vector<int>fullLines);
-        void lineClean(std::vector<int>fullLines);
+        void dropNotActiveFigures(std::vector<int> fullLines);
+        void lineClean(std::vector<int> fullLines);
         void lineCheck();
         void update();
         void clean();
+        void theEndOfGame();
+
+    public:
         void addFigure();
+        void generateNextFigure();
+        Object::Figure *getNextFigure();
     };
 } // namespace Map
 
