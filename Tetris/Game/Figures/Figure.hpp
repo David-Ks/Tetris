@@ -9,7 +9,7 @@ namespace Object
     class Figure
     {
     public:
-        Block *blocks[4];
+        std::vector<Block*>blocks;
         Position position;
         bool isRotatable;
 

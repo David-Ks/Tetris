@@ -1,5 +1,6 @@
 #include "Settings.cpp"
 #include "Game.cpp"
+#include <memory>
 
 #include "Players/StandardPlayer.cpp"
 
@@ -26,12 +27,7 @@ public:
 public:
     void run()
     {
-        Loop *loop = new Loop;
-
-        Listen::MenuEvent *event = new Listen::MenuEvent;
-        loop->menu(event);
-
-        delete event;
-        delete loop;
+        std::unique_ptr<Loop>loop(new Loop);
+        loop->menu();
     }
 };

@@ -38,7 +38,7 @@ void Draw::NcursesWindow::drawGame()
 {
     map_t map = Game::map()->map;
     int centerHight = hight / 2 - Settings::height + 10;
-    int centerWeidth = weidth / 2 - Settings::weidth; // 10-is menu items max length
+    int centerWeidth = weidth / 2 - Settings::weidth;
 
     for (int i = 0; i < Settings::height - 1; i++)
     {

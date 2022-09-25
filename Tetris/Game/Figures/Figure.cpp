@@ -8,7 +8,7 @@ Object::Figure::Figure()
 
     for (int i = 0; i < Settings::types[typeNumber].size(); i++)
     {
-        blocks[i] = new Block;
+        blocks.push_back(new Block);
         position.x = Settings::types[typeNumber][i][0];
         position.y = Settings::types[typeNumber][i][1];
         blocks[i]->setPos(position);

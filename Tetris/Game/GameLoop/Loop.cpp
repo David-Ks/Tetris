@@ -1,7 +1,9 @@
 #include "Loop.hpp"
+#include <memory>
 
-void Loop::menu(Listen::Event *event)
+void Loop::menu()
 {
+    std::unique_ptr<Listen::Event>event(new Listen::MenuEvent);
     unsigned choice = 0;
 
     while (true)
@@ -13,15 +15,14 @@ void Loop::menu(Listen::Event *event)
         if (choice == 666) // exit code
             break;
         else if (choice == 777) // Play code
-        {
-            Listen::Event *gameEvent = new Listen::GameEvent();
-            game(gameEvent);
-        }
+            game();
     }
 }
 
-void Loop::game(Listen::Event *event)
+void Loop::game()
 {
+    std::unique_ptr<Listen::Event>event(new Listen::GameEvent);
+
     unsigned choice = 0;
     unsigned autoDropDown = 661;
 

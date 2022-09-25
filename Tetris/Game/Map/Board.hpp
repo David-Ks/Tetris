@@ -37,15 +37,8 @@ namespace Map
         virtual Object::Figure *getNextFigure() = 0;
 
     public:
-        bool getGameOver()
-        {
-            return gameOver;
-        }
-
-        void setGameOver(bool gameOver)
-        {
-            this->gameOver = gameOver;
-        }
+        bool getGameOver() { return gameOver; }
+        void setGameOver(bool gameOver) { this->gameOver = gameOver; }
     };
 } // namespace Map
 

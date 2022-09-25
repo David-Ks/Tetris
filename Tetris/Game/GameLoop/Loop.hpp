@@ -14,8 +14,8 @@ public:
     ~Loop() {}
 
 public:
-    void menu(Listen::Event *event);
-    void game(Listen::Event *event);
+    void menu();
+    void game();
 };
 
 #endif
