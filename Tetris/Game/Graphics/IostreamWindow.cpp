@@ -15,7 +15,7 @@ void Draw::IostreamWindow::drawMenu(unsigned &choice)
 
 void Draw::IostreamWindow::drawGame()
 {
-    map_t map = Game::map()->map;
+    map_t map = Map::board().map;
     for (int i = 0; i < Settings::height - 1; i++)
     {
         std::cout << "||";

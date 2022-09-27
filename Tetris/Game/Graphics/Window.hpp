@@ -15,6 +15,8 @@ namespace Draw
         virtual void clean() = 0;
         virtual int input() = 0;
     };
+
+    Window *window();
 } // namespace Draw
 
 #endif

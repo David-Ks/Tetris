@@ -1,17 +1,20 @@
-#include "StandardBoard.hpp"
+#include "Board.hpp"
+#include "../Settings.cpp"
 #include <algorithm>
 #include <set>
-#include <iostream>
 
-Map::StandardBoard::StandardBoard()
+Map::Board &Map::board()
 {
-    map = map_t(Settings::height, std::vector<char>(Settings::weidth, 0));
-    linesScore = new int[Settings::height - 3];
+    static Map::Board brd;
+    return brd;
 }
 
-Map::StandardBoard::~StandardBoard() {}
+Map::Board::Board() : gameOver(false)
+{
+    map = map_t(Settings::height, std::vector<char>(Settings::weidth, 0));
+}
 
-void Map::StandardBoard::update()
+void Map::Board::update()
 {
     clean();
 
@@ -33,7 +36,7 @@ void Map::StandardBoard::update()
     }
 }
 
-void Map::StandardBoard::clean()
+void Map::Board::clean()
 {
     for (auto &row : map)
     {
@@ -41,7 +44,7 @@ void Map::StandardBoard::clean()
     }
 }
 
-void Map::StandardBoard::lineCheck()
+void Map::Board::lineCheck()
 {
     std::vector<int> fullLines;
     std::set<int> setBlocks;
@@ -77,7 +80,7 @@ void Map::StandardBoard::lineCheck()
     }
 }
 
-void Map::StandardBoard::lineClean(std::vector<int> fullLines)
+void Map::Board::lineClean(std::vector<int> fullLines)
 {
     for (auto &figure : figures)
     {
@@ -109,11 +112,11 @@ void Map::StandardBoard::lineClean(std::vector<int> fullLines)
         }
     }
 
-    Game::player()->addScore(fullLines.size());
+    User::player().addScore(fullLines.size());
     dropNotActiveFigures(fullLines);
 }
 
-void Map::StandardBoard::dropNotActiveFigures(std::vector<int> fullLines)
+void Map::Board::dropNotActiveFigures(std::vector<int> fullLines)
 {
     int min = *std::min_element(fullLines.begin(), fullLines.end());
 
@@ -137,8 +140,9 @@ void Map::StandardBoard::dropNotActiveFigures(std::vector<int> fullLines)
     }
 }
 
-void Map::StandardBoard::theEndOfGame()
+void Map::Board::theEndOfGame()
 {
+    setGameOver(true);
     for (auto &figure : figures)
     {
         if (!figure)
@@ -156,41 +160,30 @@ void Map::StandardBoard::theEndOfGame()
     figures.clear();
 }
 
-void Map::StandardBoard::addFigure()
+void Map::Board::addFigure()
 {
     if (!getNextFigure())
-    {
         generateNextFigure();
-    }
 
     Object::Figure *newFigure = getNextFigure();
+    Position newPosition;
 
-    Position pos;
-    pos.x = 0;
-    pos.y = (Settings::weidth - 3) / 2; // Center
+    newPosition.x = 0;
+    newPosition.y = (Settings::weidth - 3) / 2; // Center
 
-    newFigure->setPos(pos);
-
-    if (figures.size() != 0)
-    {
-        Object::Figure *lastFigure = figures.back();
-
-        for (auto &block : lastFigure->blocks)
-        {
-            linesScore[block->getPos().x + lastFigure->getPos().x]++;
-        }
-    }
+    newFigure->setPos(newPosition);
 
     figures.push_back(newFigure);
+
     generateNextFigure();
 }
 
-Object::Figure *Map::StandardBoard::getNextFigure()
+Object::Figure *Map::Board::getNextFigure()
 {
     return nextFigure;
 }
 
-void Map::StandardBoard::generateNextFigure()
+void Map::Board::generateNextFigure()
 {
     nextFigure = new Object::Figure;
 }

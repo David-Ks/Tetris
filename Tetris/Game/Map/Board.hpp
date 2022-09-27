@@ -13,7 +13,6 @@ namespace Map
     {
     protected:
         bool gameOver;
-        int *linesScore;
         Object::Figure *nextFigure;
 
     public:
@@ -21,25 +20,29 @@ namespace Map
         map_t map;
 
     public:
-        Board() : gameOver(false) {}
-        virtual ~Board() {}
+        Board();
+        ~Board() {}
 
     public:
-        virtual void lineClean(std::vector<int> fullLines) = 0;
-        virtual void lineCheck() = 0;
-        virtual void update() = 0;
-        virtual void clean() = 0;
-        virtual void theEndOfGame() = 0;
+        void lineClean(std::vector<int> fullLines);
+        void dropNotActiveFigures(std::vector<int> fullLines);
+        void lineCheck();
+        void update();
+        void clean();
+        void theEndOfGame();
 
     public:
-        virtual void addFigure() = 0;
-        virtual void generateNextFigure() = 0;
-        virtual Object::Figure *getNextFigure() = 0;
+        void addFigure();
+        void generateNextFigure();
+        Object::Figure *getNextFigure();
 
     public:
         bool getGameOver() { return gameOver; }
         void setGameOver(bool gameOver) { this->gameOver = gameOver; }
     };
+
+    Board &board();
+
 } // namespace Map
 
 #endif

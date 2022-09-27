@@ -1,3 +1,9 @@
+#ifndef GAME_SETTINGS
+#define GAME_SETTINGS
+
+#include "Graphics/NcursesWindow.hpp"
+#include "Map/Board.hpp"
+
 #include <vector>
 
 namespace Settings
@@ -17,3 +23,11 @@ namespace Settings
         {{1, 1}, {1, 2}, {2, 2}, {2, 1}},
         {{1, 2}, {2, 1}, {2, 2}, {2, 3}}};
 } // namespace Settings
+
+Draw::Window * Draw::window()
+{
+    static Draw::Window *win = new Draw::NcursesWindow;
+    return win;
+}
+
+#endif

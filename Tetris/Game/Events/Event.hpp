@@ -12,7 +12,7 @@ namespace Listen
     public:
         int getKey()
         {
-            return Game::window()->input();
+            return Draw::window()->input();
         }
 
         virtual void handler(unsigned &choice) = 0;

@@ -3,23 +3,30 @@
 
 #include <string>
 
-class Player
+namespace User
 {
-protected:
-    int score;
-    std::string name;
+    class Player
+    {
+    protected:
+        int score;
+        std::string name;
 
-public:
-    Player(std::string name = "Anonymous") { score = 0; this->name = name; }
-    virtual ~Player() {}
+    public:
+        Player(std::string name = "Anonymous") : 
+            score(0),
+            name(name)
+        {
+        }
+        ~Player() {}
 
-public:
-    virtual void addScore(int score) = 0;
+    public:
+        void addScore(int cleaned);
+        void setScore(int score);
+        int getScore();
+        std::string getName();
+    };
 
-public:
-    void setScore(int score) { this->score = score; }
-    int getScore() { return score; }
-    std::string getName() { return this->name; }
-};
+    Player &player();
+} // namespace User
 
 #endif

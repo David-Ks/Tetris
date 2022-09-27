@@ -36,7 +36,7 @@ void Draw::NcursesWindow::drawMenu(unsigned &choice)
 
 void Draw::NcursesWindow::drawGame()
 {
-    map_t map = Game::map()->map;
+    map_t map = Map::board().map;
     int centerHight = hight / 2 - Settings::height + 10;
     int centerWeidth = weidth / 2 - Settings::weidth;
 
@@ -59,11 +59,11 @@ void Draw::NcursesWindow::drawGame()
 
     printw("\n");
     
-    mvprintw(centerHight + Settings::height, centerWeidth, "Player: %s\n", Game::player()->getName().c_str());
-    mvprintw(centerHight + Settings::height + 1, centerWeidth, "Score: %d\n", Game::player()->getScore());
+    mvprintw(centerHight + Settings::height, centerWeidth, "Player: %s\n", User::player().getName().c_str());
+    mvprintw(centerHight + Settings::height + 1, centerWeidth, "Score: %d\n", User::player().getScore());
 
     char nextFigure[4][4];
-    for (auto &block : Game::map()->getNextFigure()->blocks)
+    for (auto &block : Map::board().getNextFigure()->blocks)
     {
         Position blockPos = block->getPos();
         nextFigure[blockPos.x][blockPos.y] = '#';

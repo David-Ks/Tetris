@@ -8,8 +8,8 @@ void Loop::menu()
 
     while (true)
     {
-        Game::window()->clean();
-        Game::window()->drawMenu(choice);
+        Draw::window()->clean();
+        Draw::window()->drawMenu(choice);
         event->handler(choice);
 
         if (choice == 666) // exit code
@@ -26,24 +26,21 @@ void Loop::game()
     unsigned choice = 0;
     unsigned autoDropDown = 661;
 
-    Game::map()->addFigure();
-    Game::map()->setGameOver(false);
+    Map::board().addFigure();
+    Map::board().setGameOver(false);
 
-    while (!Game::map()->getGameOver())
+    while (!Map::board().getGameOver())
     {
-        Game::window()->clean();
-        Game::window()->drawGame();
+        Draw::window()->clean();
+        Draw::window()->drawGame();
         event->handler(choice);
-        Game::map()->update();
-
-        if (Game::map()->getGameOver())
+        
+        Map::board().update();
+        if (Map::board().getGameOver())
             break;
 
         event->handler(autoDropDown);
-        Game::map()->update();
-
-        if (choice == 666) // exit code
-            break;
+        Map::board().update();
     }
 
     // player->saveScoreIfRecord() and set 0

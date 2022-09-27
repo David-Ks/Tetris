@@ -1,12 +1,11 @@
 #include "Settings.cpp"
-#include "Game.cpp"
 #include <memory>
 
-#include "Players/StandardPlayer.cpp"
+#include "Players/Player.cpp"
 
 // Undefined reference Error
 #include "Figures/Figure.cpp"
-#include "Map/StandardBoard.cpp"
+#include "Map/Board.cpp"
 #include "Graphics/NcursesWindow.cpp"
 #include "Graphics/IostreamWindow.cpp"
 #include "GameLoop/Loop.cpp"
@@ -19,9 +18,7 @@ public:
     Tetris() {}
     ~Tetris()
     {
-        delete Game::window();
-        delete Game::player();
-        delete Game::map();
+        delete Draw::window();
     }
 
 public:

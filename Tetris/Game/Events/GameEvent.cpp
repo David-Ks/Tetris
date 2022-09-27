@@ -8,46 +8,46 @@ void Listen::GameEvent::handler(unsigned &choice)
 {
     Action::Command *action;
 
-    Object::Figure *activeFigure = Game::map()->figures.back();
+    Object::Figure *activeFigure = Map::board().figures.back();
 
-    int x;
+    int actionCode;
     if (choice == 661) // auto down
-        x = 2;
+        actionCode = 2;
     else
-        x = this->getKey();
+        actionCode = this->getKey();
 
-    switch (x)
+    switch (actionCode)
     {
     case 3: // Up
         action = new Action::RotateCommand(activeFigure);
-        if (action->isAvailable(Game::map()->map))
+        if (action->isAvailable(Map::board().map))
             action->execute();
         break;
 
     case 2: // Down
         action = new Action::DropCommand(activeFigure);
-        if (action->isAvailable(Game::map()->map))
+        if (action->isAvailable(Map::board().map))
             action->execute();
         else
         {
-            Game::map()->addFigure();
-            Game::map()->lineCheck();
+            Map::board().addFigure();
+            Map::board().lineCheck();
         }
         break;
 
     case 4: // Left
         action = new Action::LeftCommand(activeFigure);
-        if (action->isAvailable(Game::map()->map))
+        if (action->isAvailable(Map::board().map))
             action->execute();
         break;
 
     case 5: // Right
         action = new Action::RightCommand(activeFigure);
-        if (action->isAvailable(Game::map()->map))
+        if (action->isAvailable(Map::board().map))
             action->execute();
         break;
 
-    case 10:          // Enter
-        choice = 666; // exit code
+    case 10:         // Enter // exit code
+        Map::board().theEndOfGame();
     }
 }
