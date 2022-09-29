@@ -1,6 +1,6 @@
 #include "RightCommand.hpp"
 
-bool Action::RightCommand::isAvailable()
+bool Action::Game::RightCommand::isAvailable()
 {
     map_t map = Map::board().map;
     Object::Figure *figure = Map::board().figures.back();
@@ -25,7 +25,7 @@ bool Action::RightCommand::isAvailable()
     return true;
 }
 
-bool Action::RightCommand::execute()
+bool Action::Game::RightCommand::execute()
 {
     Object::Figure *figure = Map::board().figures.back();
     

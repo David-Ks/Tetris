@@ -27,10 +27,10 @@ void GameLoop::Loop::game()
 {
     std::unique_ptr<EventSystem::KeyBoardEvent> event(new EventSystem::KeyBoardEvent);
 
-    event->addListener(EventSystem::KEY::UP, new Action::RotateCommand);
-    event->addListener(EventSystem::KEY::DOWN, new Action::DropCommand);
-    event->addListener(EventSystem::KEY::LEFT, new Action::LeftCommand);
-    event->addListener(EventSystem::KEY::RIGHT, new Action::RightCommand);
+    event->addListener(EventSystem::KEY::UP, new Action::Game::RotateCommand);
+    event->addListener(EventSystem::KEY::DOWN, new Action::Game::DropCommand);
+    event->addListener(EventSystem::KEY::LEFT, new Action::Game::LeftCommand);
+    event->addListener(EventSystem::KEY::RIGHT, new Action::Game::RightCommand);
 
     Map::board().addFigure();
     Map::board().setGameOver(false);

@@ -1,6 +1,6 @@
-#include "LeftCommand.hpp"
+#include "DropCommand.hpp"
 
-bool Action::LeftCommand::isAvailable()
+bool Action::Game::DropCommand::isAvailable()
 {
     map_t map = Map::board().map;
     Object::Figure *figure = Map::board().figures.back();
@@ -13,25 +13,25 @@ bool Action::LeftCommand::isAvailable()
         Position blockPos = block->getPos();
         Position figurePos = figure->getPos();
 
-        int PosX = figurePos.x + blockPos.x;
-        int PosY = figurePos.y + blockPos.y - 1;
+        int PosX = figurePos.x + blockPos.x + 1;
+        int PosY = figurePos.y + blockPos.y;
 
         if (figure->isOwnBlock(PosX, PosY))
             continue;
 
-        if (map[PosX][PosY] == '#' || PosY < 0)
+        if (map[PosX][PosY] == '#' || ((PosX) >= Settings::height - 1))
             return false;
     }
     return true;
 }
 
-bool Action::LeftCommand::execute()
+bool Action::Game::DropCommand::execute()
 {
     Object::Figure *figure = Map::board().figures.back();
-
-    Position newPos = figure->getPos();
-    newPos.y--;
-    figure->setPos(newPos);
     
+    Position newPos = figure->getPos();
+    newPos.x++;
+    figure->setPos(newPos);
+
     return true;
 }

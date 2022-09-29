@@ -3,10 +3,10 @@
 
 #include "../Events/KeyBoardEvent.hpp"
 
-#include "../Controls/RotateCommand.cpp"
-#include "../Controls/DropCommand.cpp"
-#include "../Controls/LeftCommand.cpp"
-#include "../Controls/RightCommand.cpp"
+#include "../Controls/GameCommands/RotateCommand.cpp"
+#include "../Controls/GameCommands/DropCommand.cpp"
+#include "../Controls/GameCommands/LeftCommand.cpp"
+#include "../Controls/GameCommands/RightCommand.cpp"
 
 #include "../Controls/MenuCommands/DownCommand.cpp"
 #include "../Controls/MenuCommands/UpCommand.cpp"

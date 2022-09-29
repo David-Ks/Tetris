@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-bool Action::RotateCommand::isAvailable()
+bool Action::Game::RotateCommand::isAvailable()
 {
     map_t map = Map::board().map;
     Object::Figure *figure = Map::board().figures.back();
@@ -34,7 +34,7 @@ bool Action::RotateCommand::isAvailable()
     return true;
 }
 
-bool Action::RotateCommand::execute()
+bool Action::Game::RotateCommand::execute()
 {
     Object::Figure *figure = Map::board().figures.back();
     
@@ -55,7 +55,7 @@ bool Action::RotateCommand::execute()
     return true;
 }
 
-int Action::RotateCommand::getNewPos(int x)
+int Action::Game::RotateCommand::getNewPos(int x)
 {
     switch (x)
     {
