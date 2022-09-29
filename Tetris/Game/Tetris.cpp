@@ -4,13 +4,14 @@
 #include "Players/Player.cpp"
 
 // Undefined reference Error
+#include "GameLoop/Loop.cpp"
+
 #include "Figures/Figure.cpp"
 #include "Map/Board.cpp"
 #include "Graphics/NcursesWindow.cpp"
 #include "Graphics/IostreamWindow.cpp"
-#include "GameLoop/Loop.cpp"
-#include "Events/MenuEvent.cpp"
-#include "Events/GameEvent.cpp"
+
+#include "Events/KeyBoardEvent.cpp"
 
 class Tetris
 {
@@ -24,7 +25,6 @@ public:
 public:
     void run()
     {
-        std::unique_ptr<Loop>loop(new Loop);
-        loop->menu();
+        GameLoop::loop().menu();
     }
 };

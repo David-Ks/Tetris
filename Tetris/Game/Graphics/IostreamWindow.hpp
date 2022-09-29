@@ -3,27 +3,18 @@
 
 #include <string>
 #include <iostream>
+#include "Window.hpp"
 
 namespace Draw
 {
     class IostreamWindow : public Window
     {
-    private:
-        int hight;
-        int weidth;
-
-        static const int menuItemsCount = 3;
-        const std::string menuItems[menuItemsCount] = {
-            "Play",
-            "Records",
-            "Exit",
-        };
     public:
         IostreamWindow() {};
         ~IostreamWindow() {};
     
     public:
-        void drawMenu(unsigned &choice);
+        void drawMenu();
         void drawGame();
         void clean();
         int input();

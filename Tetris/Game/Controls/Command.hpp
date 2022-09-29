@@ -1,19 +1,18 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
+#include "../Settings.cpp"
+
 namespace Action
 {
     class Command
     {
-    protected:
-        Object::Figure *figure;
-
     public:
-        Command(Object::Figure *figure) { this->figure = figure; }
+        Command() {}
         virtual ~Command() {}
 
     public:
-        virtual bool isAvailable(map_t map) = 0;
+        virtual bool isAvailable() = 0;
         virtual bool execute() = 0;
     };
 } // namespace Action

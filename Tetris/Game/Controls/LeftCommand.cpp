@@ -1,7 +1,10 @@
 #include "LeftCommand.hpp"
 
-bool Action::LeftCommand::isAvailable(map_t map)
+bool Action::LeftCommand::isAvailable()
 {
+    map_t map = Map::board().map;
+    Object::Figure *figure = Map::board().figures.back();
+
     for (auto &block : figure->blocks)
     {
         if (!block)
@@ -24,6 +27,8 @@ bool Action::LeftCommand::isAvailable(map_t map)
 
 bool Action::LeftCommand::execute()
 {
+    Object::Figure *figure = Map::board().figures.back();
+
     Position newPos = figure->getPos();
     newPos.y--;
     figure->setPos(newPos);

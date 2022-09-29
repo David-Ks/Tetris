@@ -14,19 +14,12 @@ namespace Draw
         int weidth;
 
         WINDOW *window;
-
-        static const int menuItemsCount = 3;
-        const std::string menuItems[menuItemsCount] = {
-            "Play",
-            "Records",
-            "Exit",
-        };
     public:
         NcursesWindow();
         ~NcursesWindow();
     
     public:
-        void drawMenu(unsigned &choice);
+        void drawMenu();
         void drawGame();
         void clean();
         int input();

@@ -2,8 +2,11 @@
 
 #include <iostream>
 
-bool Action::RotateCommand::isAvailable(map_t map)
+bool Action::RotateCommand::isAvailable()
 {
+    map_t map = Map::board().map;
+    Object::Figure *figure = Map::board().figures.back();
+    
     if (!figure->isRotatable)
         return false;
 
@@ -33,6 +36,8 @@ bool Action::RotateCommand::isAvailable(map_t map)
 
 bool Action::RotateCommand::execute()
 {
+    Object::Figure *figure = Map::board().figures.back();
+    
     for (auto &block : figure->blocks)
     {
         if (!block)

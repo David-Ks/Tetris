@@ -8,11 +8,11 @@ namespace Action
     class RotateCommand : public Command
     {
     public:
-        RotateCommand(Object::Figure *figure) : Command(figure) {}
+        RotateCommand() {}
         ~RotateCommand() {}
 
     public:
-        bool isAvailable(map_t map);
+        bool isAvailable();
         bool execute();
     
     public:

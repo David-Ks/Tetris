@@ -1,15 +1,14 @@
 #include "IostreamWindow.hpp"
+#include "../Settings.cpp"
+
 #include <iostream>
 
-void Draw::IostreamWindow::drawMenu(unsigned &choice)
+void Draw::IostreamWindow::drawMenu()
 {
-    if (choice > menuItemsCount)
-        choice = menuItemsCount;
-
-    for (unsigned i = 0; i < menuItemsCount; i++)
+    for (unsigned i = 0; i < menuItems.size(); i++)
     {
-        if (i == choice)
-            std::cout << "Your choice = " << menuItems[i] << std::endl;
+        if (i == section)
+            std::cout << "Your choice = " << menuItems[section] << std::endl;
     }
 }
 

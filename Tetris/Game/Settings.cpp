@@ -22,9 +22,10 @@ namespace Settings
         {{1, 1}, {2, 3}, {2, 2}, {1, 2}},
         {{1, 1}, {1, 2}, {2, 2}, {2, 1}},
         {{1, 2}, {2, 1}, {2, 2}, {2, 3}}};
+
 } // namespace Settings
 
-Draw::Window * Draw::window()
+Draw::Window *Draw::window()
 {
     static Draw::Window *win = new Draw::NcursesWindow;
     return win;

@@ -1,21 +1,33 @@
 #ifndef LOOP_H
 #define LOOP_H
 
-#include "../Events/MenuEvent.hpp"
-#include "../Events/GameEvent.hpp"
+#include "../Events/KeyBoardEvent.hpp"
+
+#include "../Controls/RotateCommand.cpp"
+#include "../Controls/DropCommand.cpp"
+#include "../Controls/LeftCommand.cpp"
+#include "../Controls/RightCommand.cpp"
+
+#include "../Controls/MenuCommands/DownCommand.cpp"
+#include "../Controls/MenuCommands/UpCommand.cpp"
 
 #include <set>
 #include <map>
 
-class Loop
+namespace GameLoop
 {
-public:
-    Loop() {}
-    ~Loop() {}
+    class Loop
+    {
+    public:
+        Loop() {}
+        ~Loop() {}
 
-public:
-    void menu();
-    void game();
-};
+    public:
+        void menu();
+        void game();
+    };
+
+    Loop &loop();
+} // namespace GameLoop
 
 #endif

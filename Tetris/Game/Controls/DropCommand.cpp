@@ -1,7 +1,10 @@
 #include "DropCommand.hpp"
 
-bool Action::DropCommand::isAvailable(map_t map)
+bool Action::DropCommand::isAvailable()
 {
+    map_t map = Map::board().map;
+    Object::Figure *figure = Map::board().figures.back();
+
     for (auto &block : figure->blocks)
     {
         if (!block)
@@ -24,6 +27,8 @@ bool Action::DropCommand::isAvailable(map_t map)
 
 bool Action::DropCommand::execute()
 {
+    Object::Figure *figure = Map::board().figures.back();
+    
     Position newPos = figure->getPos();
     newPos.x++;
     figure->setPos(newPos);

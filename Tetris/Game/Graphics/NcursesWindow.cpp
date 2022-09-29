@@ -13,19 +13,16 @@ Draw::NcursesWindow::~NcursesWindow()
     endwin();
 }
 
-void Draw::NcursesWindow::drawMenu(unsigned &choice)
+void Draw::NcursesWindow::drawMenu()
 {
-    int centerHight = hight / 2 - menuItemsCount;
+    int centerHight = hight / 2 - menuItems.size();
     int centerWeidth = weidth / 2 - 10; // 10-is menu items max length
 
-    if (choice >= menuItemsCount - 1)
-        choice = menuItemsCount - 1;
-
-    for (unsigned i = 0; i < menuItemsCount; i++)
+    for (unsigned i = 0; i < menuItems.size(); i++)
     {
         mvprintw(centerHight + i, centerWeidth, " ");
 
-        if (i == choice)
+        if (i == section)
             addch('>');
         else
             addch(' ');
@@ -37,6 +34,7 @@ void Draw::NcursesWindow::drawMenu(unsigned &choice)
 void Draw::NcursesWindow::drawGame()
 {
     map_t map = Map::board().map;
+
     int centerHight = hight / 2 - Settings::height + 10;
     int centerWeidth = weidth / 2 - Settings::weidth;
 

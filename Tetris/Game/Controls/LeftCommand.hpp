@@ -8,11 +8,11 @@ namespace Action
     class LeftCommand : public Command
     {
     public:
-        LeftCommand(Object::Figure *figure) : Command(figure) {}
+        LeftCommand() {}
         ~LeftCommand() {}
 
     public:
-        bool isAvailable(map_t map);
+        bool isAvailable();
         bool execute();
     };
 } // namespace Action
