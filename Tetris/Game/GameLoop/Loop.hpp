@@ -18,13 +18,18 @@ namespace GameLoop
 {
     class Loop
     {
+    private:
+        bool exit;
     public:
-        Loop() {}
+        Loop() : exit(false) {}
         ~Loop() {}
 
     public:
         void menu();
         void game();
+    
+    public:
+        void quite();
     };
 
     Loop &loop();

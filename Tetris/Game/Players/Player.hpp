@@ -12,7 +12,7 @@ namespace User
         std::string name;
 
     public:
-        Player(std::string name = "Anonymous") : 
+        Player(const std::string &name = "Anonymous") : 
             score(0),
             name(name)
         {

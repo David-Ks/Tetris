@@ -2,15 +2,19 @@
 #define FIGURE_H
 
 #include "items/Block.cpp"
+#include "../Settings.cpp"
 
+using BlockList = std::vector<Block *>;
 
 namespace Object
 {
     class Figure
     {
-    public:
-        std::vector<Block*>blocks;
+    private:
         Position position;
+
+    public:
+        BlockList blocks;
         bool isRotatable;
 
     public:

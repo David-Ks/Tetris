@@ -1,9 +1,13 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-#include "../Settings.cpp"
 #include <vector>
+#include <string>
 
+#include "../Settings.cpp"
+
+using PressedKey = int;
+using MenuList = std::vector<std::string>;
 
 namespace Draw
 {
@@ -20,7 +24,7 @@ namespace Draw
         Section section;
     
     public:
-        static const std::vector<std::string>menuItems;
+        static const MenuList menu;
 
     public:
         Window() : section(Section::PLAY) {}
@@ -30,14 +34,14 @@ namespace Draw
         virtual void drawMenu() = 0;
         virtual void drawGame() = 0;
         virtual void clean() = 0;
-        virtual int input() = 0;
+        virtual PressedKey input() = 0;
     
     public:
         void setSection(Section section) { this->section = section; }
         Section getSection() { return section; }
     };
 
-    const std::vector<std::string> Window::menuItems = {
+    const MenuList Window::menu = {
         "Play",
         "Records",
         "Exit"

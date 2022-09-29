@@ -1,5 +1,4 @@
 #include "KeyBoardEvent.hpp"
-#include <iostream>
 
 void EventSystem::KeyBoardEvent::addListener(EventSystem::KEY key, Action::Command *command)
 {

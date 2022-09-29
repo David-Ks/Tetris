@@ -2,7 +2,7 @@
 
 bool Action::Game::RightCommand::isAvailable()
 {
-    map_t map = Map::board().map;
+    MapMatrix map = Map::board().map;
     Object::Figure *figure = Map::board().figures.back();
 
     for (auto &block : figure->blocks)
@@ -28,7 +28,7 @@ bool Action::Game::RightCommand::isAvailable()
 bool Action::Game::RightCommand::execute()
 {
     Object::Figure *figure = Map::board().figures.back();
-    
+
     Position newPos = figure->getPos();
     newPos.y++;
     figure->setPos(newPos);

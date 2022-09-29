@@ -1,11 +1,14 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include <vector>
+#include <algorithm>
+
+#include "../Settings.cpp"
 #include "../Figures/Figure.hpp"
 
-typedef std::vector<std::vector<char>> map_t;
-typedef std::vector<Object::Figure *> figureList;
+using MapMatrix = std::vector<std::vector<char>>;
+using NumericLine = std::vector<int>;
+using FigureList = std::vector<Object::Figure *>;
 
 namespace Map
 {
@@ -16,16 +19,16 @@ namespace Map
         Object::Figure *nextFigure;
 
     public:
-        figureList figures;
-        map_t map;
+        FigureList figures;
+        MapMatrix map;
 
     public:
         Board();
         ~Board() {}
 
     public:
-        void lineClean(std::vector<int> fullLines);
-        void dropNotActiveFigures(std::vector<int> fullLines);
+        void lineClean(const NumericLine &fullLines);
+        void dropNotActiveFigures(const NumericLine &fullLines);
         void lineCheck();
         void update();
         void clean();

@@ -2,7 +2,7 @@
 
 Draw::NcursesWindow::NcursesWindow()
 {
-    this->window = initscr();
+    window = initscr();
     curs_set(0);
     keypad(stdscr, true);
     getmaxyx(stdscr, hight, weidth);
@@ -15,10 +15,11 @@ Draw::NcursesWindow::~NcursesWindow()
 
 void Draw::NcursesWindow::drawMenu()
 {
-    int centerHight = hight / 2 - menuItems.size();
-    int centerWeidth = weidth / 2 - 10; // 10-is menu items max length
+    int menuItemsMaxLength = 10;
+    int centerHight = hight / 2 - menu.size();
+    int centerWeidth = weidth / 2 - menuItemsMaxLength;
 
-    for (unsigned i = 0; i < menuItems.size(); i++)
+    for (int i = 0; i < menu.size(); ++i)
     {
         mvprintw(centerHight + i, centerWeidth, " ");
 
@@ -27,36 +28,36 @@ void Draw::NcursesWindow::drawMenu()
         else
             addch(' ');
 
-        printw("%s\n", menuItems[i].c_str());
+        printw("%s\n", menu[i].c_str());
     }
 }
 
 void Draw::NcursesWindow::drawGame()
 {
-    map_t map = Map::board().map;
+    MapMatrix map = Map::board().map;
 
     int centerHight = hight / 2 - Settings::height + 10;
     int centerWeidth = weidth / 2 - Settings::weidth;
 
-    for (int i = 0; i < Settings::height - 1; i++)
+    for (int i = 0; i < Settings::height - 1; ++i)
     {
         mvprintw(centerHight + i, centerWeidth, "||");
-        for (int j = 0; j < Settings::weidth; j++)
+        for (int j = 0; j < Settings::weidth; ++j)
         {
-            if (map[i][j] != '#')
-                printw(" ");
-            else
+            if (map[i][j] == '#')
                 printw("%c", '#');
+            else
+                printw(" ");
         }
         printw("||\n");
     }
 
     mvprintw(centerHight + Settings::height - 1, centerWeidth, "T");
-    for (int t = 0; t < Settings::weidth + 3; t++)
+    for (int t = 0; t < Settings::weidth + 3; ++t)
         printw("T");
 
     printw("\n");
-    
+
     mvprintw(centerHight + Settings::height, centerWeidth, "Player: %s\n", User::player().getName().c_str());
     mvprintw(centerHight + Settings::height + 1, centerWeidth, "Score: %d\n", User::player().getScore());
 
@@ -68,9 +69,9 @@ void Draw::NcursesWindow::drawGame()
     }
 
     mvprintw(centerHight + Settings::height + 3, centerWeidth, "Next Figure: \n");
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 4; ++i)
     {
-        for (int j = 0; j < 4; j++)
+        for (int j = 0; j < 4; ++j)
         {
             if (nextFigure[i][j] != '#')
                 mvprintw(centerHight + Settings::height + i + 1, centerWeidth + 12 + j, " ");
@@ -87,7 +88,7 @@ void Draw::NcursesWindow::clean()
     refresh();
 }
 
-int Draw::NcursesWindow::input()
+PressedKey Draw::NcursesWindow::input()
 {
     halfdelay(5);
     char ch = getch();

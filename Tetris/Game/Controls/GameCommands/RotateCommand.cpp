@@ -4,7 +4,7 @@
 
 bool Action::Game::RotateCommand::isAvailable()
 {
-    map_t map = Map::board().map;
+    MapMatrix map = Map::board().map;
     Object::Figure *figure = Map::board().figures.back();
     
     if (!figure->isRotatable)

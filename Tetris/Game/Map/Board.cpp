@@ -1,7 +1,4 @@
 #include "Board.hpp"
-#include "../Settings.cpp"
-#include <algorithm>
-#include <set>
 
 Map::Board &Map::board()
 {
@@ -11,7 +8,7 @@ Map::Board &Map::board()
 
 Map::Board::Board() : gameOver(false)
 {
-    map = map_t(Settings::height, std::vector<char>(Settings::weidth, 0));
+    map = MapMatrix(Settings::height, std::vector<char>(Settings::weidth, 0));
 }
 
 void Map::Board::update()
@@ -46,9 +43,9 @@ void Map::Board::clean()
 
 void Map::Board::lineCheck()
 {
-    std::vector<int> fullLines;
+    NumericLine fullLines;
     std::set<int> setBlocks;
-    std::vector<char> vec(Settings::weidth, '#');
+    std::vector<char> fullLineExample(Settings::weidth, '#');
 
     for (auto &block : figures[figures.size() - 2]->blocks)
     {
@@ -65,7 +62,7 @@ void Map::Board::lineCheck()
     {
         for (auto &position : setBlocks)
         {
-            if (map[position] == vec)
+            if (map[position] == fullLineExample)
             {
                 fullLines.push_back(position);
             }
@@ -80,7 +77,7 @@ void Map::Board::lineCheck()
     }
 }
 
-void Map::Board::lineClean(std::vector<int> fullLines)
+void Map::Board::lineClean(const NumericLine &fullLines)
 {
     for (auto &figure : figures)
     {
@@ -116,7 +113,7 @@ void Map::Board::lineClean(std::vector<int> fullLines)
     dropNotActiveFigures(fullLines);
 }
 
-void Map::Board::dropNotActiveFigures(std::vector<int> fullLines)
+void Map::Board::dropNotActiveFigures(const NumericLine &fullLines)
 {
     int min = *std::min_element(fullLines.begin(), fullLines.end());
 

@@ -2,7 +2,7 @@
 
 bool Action::Game::LeftCommand::isAvailable()
 {
-    map_t map = Map::board().map;
+    MapMatrix map = Map::board().map;
     Object::Figure *figure = Map::board().figures.back();
 
     for (auto &block : figure->blocks)

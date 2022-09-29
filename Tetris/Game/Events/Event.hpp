@@ -2,9 +2,10 @@
 #define EVENT_H
 
 #include <map>
-#include "../Controls/Command.hpp" // temporarily
-#include "../Map/Board.hpp"        // temporarily
-#include "../Graphics/Window.hpp"  // temporarily
+
+#include "../Controls/Command.hpp"
+#include "../Graphics/Window.hpp"
+#include "../Map/Board.hpp"
 
 namespace EventSystem
 {
@@ -28,9 +29,9 @@ namespace EventSystem
 
     public:
         virtual void addListener(KEY key, Action::Command *command) = 0;
-        virtual void delListener(KEY code) = 0;
+        virtual void delListener(KEY key) = 0;
         virtual void delAllListeners() = 0;
-        virtual bool invoke(KEY code) = 0;
+        virtual bool invoke(KEY key) = 0;
     };
 } // namespace Action
 

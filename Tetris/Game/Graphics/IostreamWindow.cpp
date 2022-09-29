@@ -1,24 +1,21 @@
 #include "IostreamWindow.hpp"
-#include "../Settings.cpp"
-
-#include <iostream>
 
 void Draw::IostreamWindow::drawMenu()
 {
-    for (unsigned i = 0; i < menuItems.size(); i++)
+    for (int i = 0; i < menu.size(); ++i)
     {
         if (i == section)
-            std::cout << "Your choice = " << menuItems[section] << std::endl;
+            std::cout << "Your choice = " << menu[section] << std::endl;
     }
 }
 
 void Draw::IostreamWindow::drawGame()
 {
-    map_t map = Map::board().map;
-    for (int i = 0; i < Settings::height - 1; i++)
+    MapMatrix map = Map::board().map;
+    for (int i = 0; i < Settings::height - 1; ++i)
     {
         std::cout << "||";
-        for (int j = 0; j < Settings::weidth; j++)
+        for (int j = 0; j < Settings::weidth; ++j)
         {
             if (map[i][j] != '#')
                 std::cout << " ";
@@ -27,7 +24,7 @@ void Draw::IostreamWindow::drawGame()
         }
         std::cout << "||\n";
     }
-    for (int t = 0; t <= Settings::weidth + 3; t++)
+    for (int t = 0; t <= Settings::weidth + 3; ++t)
         std::cout << "T";
 }
 
@@ -36,7 +33,7 @@ void Draw::IostreamWindow::clean()
     std::cout << "Just clean window ;)\n";
 }
 
-int Draw::IostreamWindow::input()
+PressedKey Draw::IostreamWindow::input()
 {
     int action;
     std::cin >> action;

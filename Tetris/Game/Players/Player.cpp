@@ -15,22 +15,22 @@ void User::Player::addScore(int cleaned)
     else if (cleaned == 3)
         score += 500;
     else if (cleaned == 4)
-        score += 1000; 
+        score += 1000;
     else
         score += 1;
 }
 
 void User::Player::setScore(int score)
-{ 
-    this->score = score; 
+{
+    this->score = score;
 }
 
-int User::Player::getScore() 
-{ 
-    return score; 
+int User::Player::getScore()
+{
+    return score;
 }
 
-std::string User::Player::getName() 
-{ 
-    return name; 
+std::string User::Player::getName()
+{
+    return name;
 }

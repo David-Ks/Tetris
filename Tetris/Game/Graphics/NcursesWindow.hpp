@@ -2,7 +2,7 @@
 #define NCURSES_WINDOW_H
 
 #include <ncurses.h>
-#include <string>
+
 #include "Window.hpp"
 
 namespace Draw
@@ -22,7 +22,7 @@ namespace Draw
         void drawMenu();
         void drawGame();
         void clean();
-        int input();
+        PressedKey input();
     };
 } // namespace Draw
 

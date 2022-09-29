@@ -11,12 +11,11 @@ void GameLoop::Loop::menu()
     event->addListener(EventSystem::KEY::DOWN, new Action::Menu::DownCommand);
     event->addListener(EventSystem::KEY::ENTER, new Action::Menu::SelectCommand);
 
-
-    while (true)
+    while (!exit)
     {
         Draw::window()->clean();
         Draw::window()->drawMenu();
-        
+
         event->invoke(static_cast<EventSystem::KEY>(Draw::window()->input()));
     }
 
@@ -46,7 +45,7 @@ void GameLoop::Loop::game()
         if (Map::board().getGameOver())
             break;
 
-        // If can't Auto drop down
+        // Auto drop down and check If can't do it
         if (!event->invoke(EventSystem::KEY::DOWN))
         {
             Map::board().addFigure();
@@ -58,7 +57,12 @@ void GameLoop::Loop::game()
 
     event->delAllListeners();
 
-    // player->saveScoreIfRecord() and set 0
+    // player->saveScore() and set 0
+}
+
+void GameLoop::Loop::quite() 
+{ 
+    exit = true; 
 }
 
 GameLoop::Loop &GameLoop::loop()

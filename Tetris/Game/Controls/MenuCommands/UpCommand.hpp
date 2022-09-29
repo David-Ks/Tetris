@@ -18,6 +18,7 @@ namespace Action
             bool execute();
         };
     } // namespace Menu
+    
 } // namespace Action
 
 #endif

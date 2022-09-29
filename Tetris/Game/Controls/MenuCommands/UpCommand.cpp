@@ -2,8 +2,9 @@
 
 bool Action::Menu::UpCommand::isAvailable()
 {
-    int current = static_cast<int>(Draw::window()->getSection());
-    if (current - 1 >= 0)
+    int menuCurrentSectionNumber = static_cast<int>(Draw::window()->getSection());
+
+    if (menuCurrentSectionNumber - 1 >= 0)
     {
         return true;
     }
@@ -12,7 +13,8 @@ bool Action::Menu::UpCommand::isAvailable()
 
 bool Action::Menu::UpCommand::execute()
 {
-    int current = static_cast<int>(Draw::window()->getSection());
-    Draw::window()->setSection(static_cast<Draw::Section>(current - 1));
+    int menuCurrentSectionNumber = static_cast<int>(Draw::window()->getSection());
+
+    Draw::window()->setSection(static_cast<Draw::Section>(menuCurrentSectionNumber - 1));
     return true;
 }

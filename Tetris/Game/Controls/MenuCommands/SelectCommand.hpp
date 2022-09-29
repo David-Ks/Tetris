@@ -2,6 +2,7 @@
 #define SELECT_COMMAND_H
 
 #include "../Command.hpp"
+#include "../../GameLoop/Loop.hpp"
 
 namespace Action
 {
@@ -18,6 +19,7 @@ namespace Action
             bool execute();
         };
     } // namespace Menu
+
 } // namespace Action
 
 #endif

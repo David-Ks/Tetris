@@ -1,4 +1,3 @@
-#include <cstdlib>
 #include "Figure.hpp"
 
 Object::Figure::Figure()
@@ -6,7 +5,7 @@ Object::Figure::Figure()
     int typeNumber = rand() % Settings::types.size();
     Position position;
 
-    for (int i = 0; i < Settings::types[typeNumber].size(); i++)
+    for (int i = 0; i < Settings::types[typeNumber].size(); ++i)
     {
         blocks.push_back(new Block);
         position.x = Settings::types[typeNumber][i][0];

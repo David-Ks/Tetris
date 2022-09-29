@@ -1,5 +1,4 @@
 #include "SelectCommand.hpp"
-#include "../../GameLoop/Loop.hpp"
 
 bool Action::Menu::SelectCommand::isAvailable()
 {
@@ -8,12 +7,15 @@ bool Action::Menu::SelectCommand::isAvailable()
 
 bool Action::Menu::SelectCommand::execute()
 {
-    Draw::Section current = Draw::window()->getSection();
+    Draw::Section menuCurrentSection = Draw::window()->getSection();
     
-    switch (current)
+    switch (menuCurrentSection)
     {
     case Draw::Section::PLAY:
         GameLoop::loop().game();
+        break;
+    case Draw::Section::EXIT:
+        GameLoop::loop().quite();
         break;
     }
 
