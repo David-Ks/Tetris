@@ -1,3 +1,6 @@
+#include <algorithm>
+#include <set>
+
 #include "Board.hpp"
 
 Map::Board &Map::board()
@@ -43,8 +46,8 @@ void Map::Board::clean()
 
 void Map::Board::lineCheck()
 {
-    NumericLine fullLines;
-    std::set<int> setBlocks;
+    Indexes fullLines;
+    std::set<int> blockPoses;
     std::vector<char> fullLineExample(Settings::weidth, '#');
 
     for (auto &block : figures[figures.size() - 2]->blocks)
@@ -52,7 +55,7 @@ void Map::Board::lineCheck()
         Position blockPos = block->getPos();
         Position figurePos = figures[figures.size() - 2]->getPos();
 
-        setBlocks.insert(figurePos.x + blockPos.x);
+        blockPoses.insert(figurePos.x + blockPos.x);
 
         if (figurePos.x + blockPos.x <= 4)
             setGameOver(true);
@@ -60,7 +63,7 @@ void Map::Board::lineCheck()
 
     if (!gameOver)
     {
-        for (auto &position : setBlocks)
+        for (auto &position : blockPoses)
         {
             if (map[position] == fullLineExample)
             {
@@ -77,7 +80,7 @@ void Map::Board::lineCheck()
     }
 }
 
-void Map::Board::lineClean(const NumericLine &fullLines)
+void Map::Board::lineClean(const Indexes &fullLines)
 {
     for (auto &figure : figures)
     {
@@ -110,13 +113,13 @@ void Map::Board::lineClean(const NumericLine &fullLines)
     }
 
     User::player().addScore(fullLines.size());
-    dropNotActiveFigures(fullLines);
+    
+    int min = *std::min_element(fullLines.begin(), fullLines.end());
+    dropNotActiveFigures(min, fullLines.size());
 }
 
-void Map::Board::dropNotActiveFigures(const NumericLine &fullLines)
+void Map::Board::dropNotActiveFigures(int start, int count)
 {
-    int min = *std::min_element(fullLines.begin(), fullLines.end());
-
     for (auto &figure : figures)
     {
         if (!figure)
@@ -127,10 +130,10 @@ void Map::Board::dropNotActiveFigures(const NumericLine &fullLines)
             if (!block)
                 continue;
 
-            if (figure->getPos().x + block->getPos().x <= min)
+            if (figure->getPos().x + block->getPos().x <= start)
             {
                 Position newPos = block->getPos();
-                newPos.x += fullLines.size();
+                newPos.x += count;
                 block->setPos(newPos);
             }
         }

@@ -1,4 +1,5 @@
 #include "Figure.hpp"
+#include "../Settings.cpp"
 
 Object::Figure::Figure()
 {

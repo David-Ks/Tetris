@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-#include "../Settings.cpp"
+#include "../Players/Player.hpp"
 
 using PressedKey = int;
 using MenuList = std::vector<std::string>;
@@ -14,6 +14,7 @@ namespace Draw
     enum Section
     {
         PLAY = 0,
+        SETTINGS,
         RECORDS,
         EXIT
     };
@@ -43,6 +44,7 @@ namespace Draw
 
     const MenuList Window::menu = {
         "Play",
+        "Settings",
         "Records",
         "Exit"
     };

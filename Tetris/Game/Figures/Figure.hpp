@@ -2,7 +2,6 @@
 #define FIGURE_H
 
 #include "items/Block.cpp"
-#include "../Settings.cpp"
 
 using BlockList = std::vector<Block *>;
 

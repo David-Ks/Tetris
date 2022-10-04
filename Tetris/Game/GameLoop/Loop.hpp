@@ -1,7 +1,7 @@
 #ifndef LOOP_H
 #define LOOP_H
 
-#include "../Events/KeyBoardEvent.hpp"
+#include "../Events/KeyBoardEvent.cpp"
 
 #include "../Controls/GameCommands/RotateCommand.cpp"
 #include "../Controls/GameCommands/DropCommand.cpp"

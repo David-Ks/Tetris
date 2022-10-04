@@ -1,8 +1,6 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
-#include "../Settings.cpp"
-
 namespace Action
 {
     class Command
