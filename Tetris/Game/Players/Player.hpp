@@ -1,5 +1,5 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef PLAYER_HPP
+#define PLAYER_HPP
 
 #include <string>
 
@@ -17,13 +17,12 @@ namespace User
             name(name)
         {
         }
-        ~Player() {}
 
     public:
         void addScore(int cleaned);
         void setScore(int score);
-        int getScore();
-        std::string getName();
+        int getScore() const;
+        std::string getName() const;
     };
 
     Player &player();

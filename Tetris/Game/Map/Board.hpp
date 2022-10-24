@@ -1,18 +1,23 @@
-#ifndef BOARD_H
-#define BOARD_H
+#ifndef BOARD_HPP
+#define BOARD_HPP
 
 #include "../Figures/Figure.cpp"
-#include "../Players/Player.cpp"
+
+#include <vector>
+#include <string>
 
 using MapMatrix = std::vector<std::vector<char>>;
-using Indexes = std::vector<int>;
-using FigureList = std::vector<Object::Figure *>;
 
 namespace Map
 {
     class Board
     {
-    protected:
+    private:
+        using Indexes = std::vector<int>;
+        using FigureList = std::vector<Object::Figure *>;
+        using IndexList = std::vector<int>;
+
+    private:
         bool gameOver;
         Object::Figure *nextFigure;
 
@@ -22,12 +27,9 @@ namespace Map
 
     public:
         Board();
-        ~Board() {}
 
     public:
-        void lineClean(const Indexes &fullLines);
-        void dropNotActiveFigures(int start, int count);
-        void lineCheck();
+        void dropNotActiveFigures(const IndexList &);
         void update();
         void clean();
         void theEndOfGame();
@@ -35,11 +37,11 @@ namespace Map
     public:
         void addFigure();
         void generateNextFigure();
-        Object::Figure *getNextFigure();
+        Object::Figure *getNextFigure() const;
 
     public:
-        bool getGameOver() { return gameOver; }
-        void setGameOver(bool gameOver) { this->gameOver = gameOver; }
+        bool getGameOver() const;
+        void setGameOver(bool);
     };
 
     Board &board();

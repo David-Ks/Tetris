@@ -1,6 +1,6 @@
 #include "Block.hpp"
 
-Position Block::getPos()
+Position Block::getPos() const
 {
     return pos;
 }

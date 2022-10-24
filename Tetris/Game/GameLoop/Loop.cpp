@@ -1,7 +1,20 @@
-#include <memory>
-
 #include "Loop.hpp"
+
+#include "../Events/KeyBoardEvent.cpp"
 #include "../Controls/MenuCommands/SelectCommand.cpp"
+#include "../Controls/GameCommands/RotateCommand.cpp"
+#include "../Controls/GameCommands/DropCommand.cpp"
+#include "../Controls/GameCommands/LeftCommand.cpp"
+#include "../Controls/GameCommands/RightCommand.cpp"
+#include "../Controls/MenuCommands/DownCommand.cpp"
+#include "../Controls/MenuCommands/UpCommand.cpp"
+
+#include "../Map/Board.hpp"
+#include "../Scripts/BoardScript.cpp"
+
+#include <memory>
+#include <set>
+#include <map>
 
 void GameLoop::Loop::menu()
 {
@@ -24,16 +37,15 @@ void GameLoop::Loop::menu()
 
 void GameLoop::Loop::game()
 {
-    std::unique_ptr<EventSystem::KeyBoardEvent> event(new EventSystem::KeyBoardEvent);
+    std::unique_ptr<EventSystem::Event> event(new EventSystem::KeyBoardEvent);
+    std::unique_ptr<Scenario::Script> boardScript(new Scenario::BoardScript);
 
     event->addListener(EventSystem::KEY::UP, new Action::Game::RotateCommand);
     event->addListener(EventSystem::KEY::DOWN, new Action::Game::DropCommand);
     event->addListener(EventSystem::KEY::LEFT, new Action::Game::LeftCommand);
     event->addListener(EventSystem::KEY::RIGHT, new Action::Game::RightCommand);
 
-    Map::board().addFigure();
-    Map::board().setGameOver(false);
-
+    boardScript->start();
     while (!Map::board().getGameOver())
     {
         Draw::window()->clean();
@@ -48,8 +60,7 @@ void GameLoop::Loop::game()
         // Auto drop down and check If can't do it
         if (!event->invoke(EventSystem::KEY::DOWN))
         {
-            Map::board().addFigure();
-            Map::board().lineCheck();
+            boardScript->update();
         }
 
         Map::board().update();

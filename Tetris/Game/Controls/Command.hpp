@@ -1,5 +1,5 @@
-#ifndef COMMAND_H
-#define COMMAND_H
+#ifndef COMMAND_HPP
+#define COMMAND_HPP
 
 namespace Action
 {
@@ -10,7 +10,7 @@ namespace Action
         virtual ~Command() {}
 
     public:
-        virtual bool isAvailable() = 0;
+        virtual bool isAvailable() const = 0;
         virtual bool execute() = 0;
     };
 } // namespace Action

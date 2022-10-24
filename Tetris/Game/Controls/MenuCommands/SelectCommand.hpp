@@ -1,5 +1,5 @@
-#ifndef SELECT_COMMAND_H
-#define SELECT_COMMAND_H
+#ifndef SELECT_COMMAND_HPP
+#define SELECT_COMMAND_HPP
 
 #include "../Command.hpp"
 #include "../../GameLoop/Loop.hpp"
@@ -12,10 +12,9 @@ namespace Action
         {
         public:
             SelectCommand() {}
-            ~SelectCommand() {}
 
         public:
-            bool isAvailable();
+            bool isAvailable() const;
             bool execute();
         };
     } // namespace Menu

@@ -1,5 +1,4 @@
 #include "GameLoop/Loop.cpp"
-#include "Map/Board.cpp"
 #include "Graphics/NcursesWindow.cpp"
 
 class Tetris

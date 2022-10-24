@@ -1,8 +1,8 @@
 #include "DownCommand.hpp"
 
-bool Action::Menu::DownCommand::isAvailable()
+bool Action::Menu::DownCommand::isAvailable() const
 {
-    int menuCurrentSectionNumber = static_cast<int>(Draw::window()->getSection());
+    const int menuCurrentSectionNumber = static_cast<int>(Draw::window()->getSection());
 
     if (menuCurrentSectionNumber + 1 < Draw::window()->menu.size())
     {

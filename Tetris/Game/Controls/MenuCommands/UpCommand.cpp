@@ -1,8 +1,8 @@
 #include "UpCommand.hpp"
 
-bool Action::Menu::UpCommand::isAvailable()
+bool Action::Menu::UpCommand::isAvailable() const
 {
-    int menuCurrentSectionNumber = static_cast<int>(Draw::window()->getSection());
+    const int menuCurrentSectionNumber = static_cast<int>(Draw::window()->getSection());
 
     if (menuCurrentSectionNumber - 1 >= 0)
     {

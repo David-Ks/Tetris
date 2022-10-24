@@ -1,5 +1,5 @@
-#ifndef RIGHTCOMMAND_H
-#define RIGHTCOMMAND_H
+#ifndef RIGHT_COMMAND_HPP
+#define RIGHT_COMMAND_HPP
 
 #include "../Command.hpp"
 
@@ -11,10 +11,9 @@ namespace Action
         {
         public:
             RightCommand() {}
-            ~RightCommand() {}
 
         public:
-            bool isAvailable();
+            bool isAvailable() const;
             bool execute();
         };
     } // namespace Game

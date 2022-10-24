@@ -1,5 +1,5 @@
-#ifndef UP_COMMAND_H
-#define UP_COMMAND_H
+#ifndef UP_COMMAND_HPP
+#define UP_COMMAND_HPP
 
 #include "../Command.hpp"
 
@@ -11,10 +11,9 @@ namespace Action
         {
         public:
             UpCommand() {}
-            ~UpCommand() {}
 
         public:
-            bool isAvailable();
+            bool isAvailable() const;
             bool execute();
         };
     } // namespace Menu

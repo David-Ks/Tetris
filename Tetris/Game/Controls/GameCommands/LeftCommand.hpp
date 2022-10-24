@@ -1,5 +1,5 @@
-#ifndef LEFTCOMMAND_H
-#define LEFTCOMMAND_H
+#ifndef LEFT_COMMAND_HPP
+#define LEFT_COMMAND_HPP
 
 #include "../Command.hpp"
 
@@ -11,10 +11,9 @@ namespace Action
         {
         public:
             LeftCommand() {}
-            ~LeftCommand() {}
 
         public:
-            bool isAvailable();
+            bool isAvailable() const;
             bool execute();
         };
     } // namespace Game

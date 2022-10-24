@@ -1,5 +1,5 @@
-#ifndef BLOCK_H
-#define BLOCK_H
+#ifndef BLOCK_HPP
+#define BLOCK_HPP
 
 struct Position
 {
@@ -13,11 +13,7 @@ private:
     Position pos;
 
 public:
-    Block() {}
-    ~Block() {}
-
-public:
-    Position getPos();
+    Position getPos() const;
     void setPos(Position pos);
 };
 

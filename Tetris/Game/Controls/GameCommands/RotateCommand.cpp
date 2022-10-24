@@ -2,24 +2,22 @@
 
 #include <iostream>
 
-bool Action::Game::RotateCommand::isAvailable()
+bool Action::Game::RotateCommand::isAvailable() const
 {
-    MapMatrix map = Map::board().map;
-    Object::Figure *figure = Map::board().figures.back();
-    
+    const MapMatrix map = Map::board().map;
+    const Object::Figure *figure = Map::board().figures.back();
+
     if (!figure->isRotatable)
         return false;
 
-    for (auto &block : figure->blocks)
+    for (const auto &block : figure->blocks)
     {
         if (!block)
             continue;
 
-        Position blockPos = block->getPos();
-        Position figurePos = figure->getPos();
-
-        int rotateX = blockPos.y;
-        int rotateY = getNewPos(blockPos.x);
+        const Position figurePos = figure->getPos();
+        const int rotateX = block->getPos().y;
+        const int rotateY = getNewPos(block->getPos().x);
 
         if (figure->isOwnBlock(rotateX + figurePos.x, rotateY + figurePos.y))
             continue;
@@ -37,7 +35,7 @@ bool Action::Game::RotateCommand::isAvailable()
 bool Action::Game::RotateCommand::execute()
 {
     Object::Figure *figure = Map::board().figures.back();
-    
+
     for (auto &block : figure->blocks)
     {
         if (!block)
@@ -55,7 +53,7 @@ bool Action::Game::RotateCommand::execute()
     return true;
 }
 
-int Action::Game::RotateCommand::getNewPos(int x)
+int Action::Game::RotateCommand::getNewPos(int x) const
 {
     switch (x)
     {

@@ -1,5 +1,5 @@
-#ifndef KEYBOARD_EVENT_H
-#define KEYBOARD_EVENT_H
+#ifndef KEYBOARD_EVENT_HPP
+#define KEYBOARD_EVENT_HPP
 
 #include "Event.hpp"
 
@@ -9,7 +9,6 @@ namespace EventSystem
     {
     public:
         KeyBoardEvent() {}
-        ~KeyBoardEvent() {}
     
     public:
         void addListener(KEY key, Action::Command* command);

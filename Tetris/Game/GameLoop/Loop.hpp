@@ -1,18 +1,6 @@
-#ifndef LOOP_H
-#define LOOP_H
+#ifndef LOOP_HPP
+#define LOOP_HPP
 
-#include "../Events/KeyBoardEvent.cpp"
-
-#include "../Controls/GameCommands/RotateCommand.cpp"
-#include "../Controls/GameCommands/DropCommand.cpp"
-#include "../Controls/GameCommands/LeftCommand.cpp"
-#include "../Controls/GameCommands/RightCommand.cpp"
-
-#include "../Controls/MenuCommands/DownCommand.cpp"
-#include "../Controls/MenuCommands/UpCommand.cpp"
-
-#include <set>
-#include <map>
 
 namespace GameLoop
 {
@@ -22,7 +10,6 @@ namespace GameLoop
         bool exit;
     public:
         Loop() : exit(false) {}
-        ~Loop() {}
 
     public:
         void menu();

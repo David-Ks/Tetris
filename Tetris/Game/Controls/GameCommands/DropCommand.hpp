@@ -1,5 +1,5 @@
-#ifndef DROPCOMMAND_H
-#define DROPCOMMAND_H
+#ifndef DROP_COMMAND_HPP
+#define DROP_COMMAND_HPP
 
 #include "../Command.hpp"
 
@@ -11,10 +11,9 @@ namespace Action
         {
         public:
             DropCommand() {}
-            ~DropCommand() {}
 
         public:
-            bool isAvailable();
+            bool isAvailable() const;
             bool execute();
         };
     } // namespace Game

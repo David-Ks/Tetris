@@ -1,7 +1,9 @@
-#ifndef FIGURE_H
-#define FIGURE_H
+#ifndef FIGURE_HPP
+#define FIGURE_HPP
 
 #include "items/Block.cpp"
+
+#include <vector>
 
 using BlockList = std::vector<Block *>;
 
@@ -18,12 +20,12 @@ namespace Object
 
     public:
         Figure();
-        ~Figure();
+        bool operator==(const Figure& that) const;
 
     public:
-        bool isOwnBlock(int x, int y);
+        bool isOwnBlock(int x, int y) const;
         void setPos(Position position);
-        Position getPos();
+        Position getPos() const;
     };
 
 } // namespace Object

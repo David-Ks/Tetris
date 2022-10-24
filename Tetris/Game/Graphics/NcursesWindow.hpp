@@ -1,7 +1,5 @@
-#ifndef NCURSES_WINDOW_H
-#define NCURSES_WINDOW_H
-
-#include <ncurses.h>
+#ifndef NCURSES_WINDOW_HPP
+#define NCURSES_WINDOW_HPP
 
 #include "Window.hpp"
 
@@ -12,8 +10,7 @@ namespace Draw
     private:
         int hight;
         int weidth;
-
-        WINDOW *window;
+        
     public:
         NcursesWindow();
         ~NcursesWindow();

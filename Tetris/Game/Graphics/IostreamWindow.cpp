@@ -1,4 +1,9 @@
 #include "IostreamWindow.hpp"
+#include "../Players/Player.hpp"
+#include "../Map/Board.cpp"
+#include "../Settings.cpp"
+
+#include <iostream>
 
 void Draw::IostreamWindow::drawMenu()
 {

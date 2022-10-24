@@ -1,8 +1,13 @@
 #include "NcursesWindow.hpp"
+#include "../Players/Player.hpp"
+#include "../Map/Board.cpp"
+#include "../Settings.cpp"
+
+#include <ncurses.h>
 
 Draw::NcursesWindow::NcursesWindow()
 {
-    window = initscr();
+    initscr();
     curs_set(0);
     keypad(stdscr, true);
     getmaxyx(stdscr, hight, weidth);

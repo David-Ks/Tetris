@@ -1,5 +1,5 @@
-#ifndef DOWN_COMMAND_H
-#define DOWN_COMMAND_H
+#ifndef DOWN_COMMAND_HPP
+#define DOWN_COMMAND_HPP
 
 #include "../Command.hpp"
 
@@ -11,10 +11,9 @@ namespace Action
         {
         public:
             DownCommand() {}
-            ~DownCommand() {}
 
         public:
-            bool isAvailable();
+            bool isAvailable() const;
             bool execute();
         };
     } // namespace Menu

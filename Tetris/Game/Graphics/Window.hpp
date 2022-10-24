@@ -1,10 +1,8 @@
-#ifndef WINDOW_H
-#define WINDOW_H
+#ifndef WINDOW_HPP
+#define WINDOW_HPP
 
 #include <vector>
 #include <string>
-
-#include "../Players/Player.hpp"
 
 using PressedKey = int;
 using MenuList = std::vector<std::string>;
@@ -39,7 +37,7 @@ namespace Draw
     
     public:
         void setSection(Section section) { this->section = section; }
-        Section getSection() { return section; }
+        Section getSection() const { return section; }
     };
 
     const MenuList Window::menu = {

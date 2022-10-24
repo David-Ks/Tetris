@@ -1,6 +1,6 @@
 #include "SelectCommand.hpp"
 
-bool Action::Menu::SelectCommand::isAvailable()
+bool Action::Menu::SelectCommand::isAvailable() const
 {
     return true;
 }

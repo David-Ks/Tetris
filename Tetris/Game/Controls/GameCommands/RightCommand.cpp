@@ -1,20 +1,17 @@
 #include "RightCommand.hpp"
 
-bool Action::Game::RightCommand::isAvailable()
+bool Action::Game::RightCommand::isAvailable() const
 {
-    MapMatrix map = Map::board().map;
-    Object::Figure *figure = Map::board().figures.back();
+    const MapMatrix map = Map::board().map;
+    const Object::Figure *figure = Map::board().figures.back();
 
-    for (auto &block : figure->blocks)
+    for (const auto &block : figure->blocks)
     {
         if (!block)
             continue;
 
-        Position blockPos = block->getPos();
-        Position figurePos = figure->getPos();
-
-        int PosX = figurePos.x + blockPos.x;
-        int PosY = figurePos.y + blockPos.y + 1;
+        const int PosX = figure->getPos().x + block->getPos().x;
+        const int PosY = figure->getPos().y + block->getPos().y + 1;
 
         if (figure->isOwnBlock(PosX, PosY))
             continue;

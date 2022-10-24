@@ -25,12 +25,12 @@ void User::Player::setScore(int score)
     this->score = score;
 }
 
-int User::Player::getScore()
+int User::Player::getScore() const
 {
     return score;
 }
 
-std::string User::Player::getName()
+std::string User::Player::getName() const
 {
     return name;
 }

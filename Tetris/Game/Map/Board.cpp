@@ -1,7 +1,10 @@
 #include <algorithm>
 #include <set>
+#include <vector>
 
 #include "Board.hpp"
+#include "../Figures/Figure.hpp"
+#include "../Players/Player.cpp"
 
 Map::Board &Map::board()
 {
@@ -44,82 +47,11 @@ void Map::Board::clean()
     }
 }
 
-void Map::Board::lineCheck()
+void Map::Board::dropNotActiveFigures(const IndexList &fullLines)
 {
-    Indexes fullLines;
-    std::set<int> blockPoses;
-    std::vector<char> fullLineExample(Settings::weidth, '#');
+    const int start = *std::min_element(fullLines.begin(), fullLines.end());
+    const int count = fullLines.size();
 
-    for (auto &block : figures[figures.size() - 2]->blocks)
-    {
-        Position blockPos = block->getPos();
-        Position figurePos = figures[figures.size() - 2]->getPos();
-
-        blockPoses.insert(figurePos.x + blockPos.x);
-
-        if (figurePos.x + blockPos.x <= 4)
-            setGameOver(true);
-    }
-
-    if (!gameOver)
-    {
-        for (auto &position : blockPoses)
-        {
-            if (map[position] == fullLineExample)
-            {
-                fullLines.push_back(position);
-            }
-        }
-
-        if (fullLines.size() != 0)
-            lineClean(fullLines);
-    }
-    else
-    {
-        theEndOfGame();
-    }
-}
-
-void Map::Board::lineClean(const Indexes &fullLines)
-{
-    for (auto &figure : figures)
-    {
-        if (!figure)
-            continue;
-
-        int count = 0;
-        for (auto &block : figure->blocks)
-        {
-            if (!block)
-            {
-                count++;
-                continue;
-            }
-
-            if (std::find(fullLines.begin(), fullLines.end(),
-                          figure->getPos().x + block->getPos().x) != fullLines.end())
-            {
-                delete block;
-                block = 0;
-            }
-        }
-
-        if (count == 4)
-        {
-            delete figure;
-            figure = 0;
-            continue;
-        }
-    }
-
-    User::player().addScore(fullLines.size());
-    
-    int min = *std::min_element(fullLines.begin(), fullLines.end());
-    dropNotActiveFigures(min, fullLines.size());
-}
-
-void Map::Board::dropNotActiveFigures(int start, int count)
-{
     for (auto &figure : figures)
     {
         if (!figure)
@@ -158,6 +90,9 @@ void Map::Board::theEndOfGame()
         figure = 0;
     }
     figures.clear();
+
+    delete nextFigure;
+    nextFigure = 0;
 }
 
 void Map::Board::addFigure()
@@ -166,19 +101,17 @@ void Map::Board::addFigure()
         generateNextFigure();
 
     Object::Figure *newFigure = getNextFigure();
+    
     Position newPosition;
-
     newPosition.x = 0;
     newPosition.y = (Settings::weidth - 3) / 2; // Center
 
     newFigure->setPos(newPosition);
-
     figures.push_back(newFigure);
-
     generateNextFigure();
 }
 
-Object::Figure *Map::Board::getNextFigure()
+Object::Figure *Map::Board::getNextFigure() const
 {
     return nextFigure;
 }
@@ -187,3 +120,13 @@ void Map::Board::generateNextFigure()
 {
     nextFigure = new Object::Figure;
 }
+
+bool Map::Board::getGameOver() const
+{
+    return gameOver;
+}
+void Map::Board::setGameOver(bool gameOver)
+{
+    this->gameOver = gameOver;
+}
+

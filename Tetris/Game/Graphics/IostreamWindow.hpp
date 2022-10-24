@@ -1,7 +1,5 @@
-#ifndef IOSTREAM_WINDOW_H
-#define IOSTREAM_WINDOW_H
-
-#include <iostream>
+#ifndef IOSTREAM_WINDOW_HPP
+#define IOSTREAM_WINDOW_HPP
 
 #include "Window.hpp"
 
@@ -10,8 +8,7 @@ namespace Draw
     class IostreamWindow : public Window
     {
     public:
-        IostreamWindow() {};
-        ~IostreamWindow() {};
+        IostreamWindow() {}
     
     public:
         void drawMenu();

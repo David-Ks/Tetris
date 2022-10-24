@@ -17,16 +17,14 @@ Object::Figure::Figure()
     isRotatable = true;
 }
 
-Object::Figure::~Figure() {}
-
-bool Object::Figure::isOwnBlock(int x, int y)
+bool Object::Figure::isOwnBlock(int x, int y) const
 {
     for (auto &block : blocks)
     {
         if (!block)
             continue;
 
-        Position blockPos = block->getPos();
+        const Position blockPos = block->getPos();
 
         if (blockPos.x + position.x == x && blockPos.y + position.y == y)
             return true;
@@ -39,7 +37,17 @@ void Object::Figure::setPos(Position position)
     this->position = position;
 }
 
-Position Object::Figure::getPos()
+Position Object::Figure::getPos() const
 {
     return position;
+}
+
+bool Object::Figure::operator==(const Figure& that) const
+{
+    const Position thisPos = this->getPos();
+    const Position thatPos = that.getPos();
+
+    if (thisPos.x == thatPos.x && thisPos.y == thatPos.y)
+        return true;
+    return false;
 }

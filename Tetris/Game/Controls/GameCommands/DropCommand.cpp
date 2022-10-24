@@ -1,20 +1,17 @@
 #include "DropCommand.hpp"
 
-bool Action::Game::DropCommand::isAvailable()
+bool Action::Game::DropCommand::isAvailable() const
 {
-    MapMatrix map = Map::board().map;
-    Object::Figure *figure = Map::board().figures.back();
+    const MapMatrix map = Map::board().map;
+    const Object::Figure *figure = Map::board().figures.back();
 
-    for (auto &block : figure->blocks)
+    for (const auto &block : figure->blocks)
     {
         if (!block)
             continue;
 
-        Position blockPos = block->getPos();
-        Position figurePos = figure->getPos();
-
-        int PosX = figurePos.x + blockPos.x + 1;
-        int PosY = figurePos.y + blockPos.y;
+        const int PosX = figure->getPos().x + block->getPos().x + 1;
+        const int PosY = figure->getPos().y + block->getPos().y;
 
         if (figure->isOwnBlock(PosX, PosY))
             continue;
@@ -27,10 +24,16 @@ bool Action::Game::DropCommand::isAvailable()
 
 bool Action::Game::DropCommand::execute()
 {
+    constexpr static int minHightForGameOver = 4;
+    constexpr static int gameMatrixHight = 4;
     Object::Figure *figure = Map::board().figures.back();
     
     Position newPos = figure->getPos();
     newPos.x++;
+
+    if (newPos.x + gameMatrixHight <= minHightForGameOver)
+        Map::board().theEndOfGame();
+
     figure->setPos(newPos);
 
     return true;

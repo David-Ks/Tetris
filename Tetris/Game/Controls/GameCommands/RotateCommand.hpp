@@ -1,5 +1,5 @@
-#ifndef ROTATECOMMAND_H
-#define ROTATECOMMAND_H
+#ifndef ROTATE_COMMAND_HPP
+#define ROTATE_COMMAND_HPP
 
 #include "../Command.hpp"
 
@@ -11,14 +11,13 @@ namespace Action
         {
         public:
             RotateCommand() {}
-            ~RotateCommand() {}
 
         public:
-            bool isAvailable();
+            bool isAvailable() const;
             bool execute();
 
         public:
-            int getNewPos(int x);
+            int getNewPos(int x) const;
         };
     } // namespace Game
 

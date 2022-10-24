@@ -10,8 +10,8 @@ namespace Settings
 {
     using TypeList = std::vector<std::vector<std::vector<int>>>; // 3D
 
-    const static int height = 30;
-    const static int weidth = 12;
+    constexpr static int height = 30;
+    constexpr static int weidth = 12;
 
     // Must fit in a 4x4 matrix
     const static TypeList types = {
