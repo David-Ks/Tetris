@@ -1,13 +1,15 @@
 #include "RotateCommand.hpp"
+#include "../../Map/Board.hpp"
+#include "../../Utils/Objects/Tools.cpp"
 
 #include <iostream>
 
 bool Action::Game::RotateCommand::isAvailable() const
 {
     const MapMatrix map = Map::board().map;
-    const Object::Figure *figure = Map::board().figures.back();
+    const Object::Figure *figure = Utils::Objects::getlastItem(Map::board().figures);
 
-    if (!figure->isRotatable)
+    if (!figure || !figure->isRotatable)
         return false;
 
     for (const auto &block : figure->blocks)
@@ -34,7 +36,7 @@ bool Action::Game::RotateCommand::isAvailable() const
 
 bool Action::Game::RotateCommand::execute()
 {
-    Object::Figure *figure = Map::board().figures.back();
+    Object::Figure *figure = Utils::Objects::getlastItem(Map::board().figures);
 
     for (auto &block : figure->blocks)
     {

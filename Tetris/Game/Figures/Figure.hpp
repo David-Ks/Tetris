@@ -20,7 +20,6 @@ namespace Object
 
     public:
         Figure();
-        bool operator==(const Figure& that) const;
 
     public:
         bool isOwnBlock(int x, int y) const;

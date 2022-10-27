@@ -3,6 +3,7 @@
 #include "../Settings.cpp"
 #include "../Players/Player.hpp"
 #include "../Figures/Figure.hpp"
+#include "../Utils/Objects/Tools.cpp"
 
 #include <algorithm>
 #include <vector>
@@ -18,42 +19,46 @@ void Scenario::BoardScript::start()
 
 void Scenario::BoardScript::update()
 {
+    if (Map::board().getGameOver())
+        return;
+
     Map::board().addFigure();
 
     IndexList fullLines = getFullLines();
     if (!fullLines.empty())
+    {
         cleanLines(fullLines);
+        Map::board().dropNotActiveFigures(fullLines);
+        User::player().addScore(fullLines.size());
+    }
 }
 
 IndexList Scenario::BoardScript::getFullLines()
 {
     const static std::vector<char> fullLineExample(Settings::weidth, '#');
-
     IndexList fullLines;
     std::set<int> blockPoses;
 
-    const auto &figures = Map::board().figures;
+    const auto lastDropedFigure = Utils::Objects::getPenultItem(Map::board().figures);
+    const Position figurePos = lastDropedFigure->getPos();
+    if (!lastDropedFigure)
+        return fullLines;
 
-    for (auto &block : figures[figures.size() - 2]->blocks)
+    for (auto &block : lastDropedFigure->blocks)
     {
+        if (!block)
+            continue;
+
         const Position blockPos = block->getPos();
-        const Position figurePos = figures[figures.size() - 2]->getPos();
         blockPoses.insert(figurePos.x + blockPos.x);
     }
 
-    if (!Map::board().getGameOver())
+    for (const auto &position : blockPoses)
     {
-        for (const auto &position : blockPoses)
+        if (Map::board().map[position] == fullLineExample)
         {
-            if (Map::board().map[position] == fullLineExample)
-            {
-                fullLines.push_back(position);
-            }
+            fullLines.push_back(position);
         }
-    }
-    else
-    {
-        Map::board().theEndOfGame();
     }
 
     return fullLines;
@@ -86,11 +91,7 @@ void Scenario::BoardScript::cleanLines(const IndexList &fullLines)
 
         if (deletedBlockcount == figure->blocks.size())
         {
-            delete figure;
-            figure = 0;
+            Utils::Objects::del(figure);
         }
     }
-
-    Map::board().dropNotActiveFigures(fullLines);
-    User::player().addScore(fullLines.size());
 }

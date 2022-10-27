@@ -20,8 +20,8 @@ void GameLoop::Loop::menu()
 {
     std::unique_ptr<EventSystem::KeyBoardEvent> event(new EventSystem::KeyBoardEvent);
 
-    event->addListener(EventSystem::KEY::UP, new Action::Menu::UpCommand);
-    event->addListener(EventSystem::KEY::DOWN, new Action::Menu::DownCommand);
+    event->addListener(EventSystem::KEY::UP,    new Action::Menu::UpCommand);
+    event->addListener(EventSystem::KEY::DOWN,  new Action::Menu::DownCommand);
     event->addListener(EventSystem::KEY::ENTER, new Action::Menu::SelectCommand);
 
     while (!exit)
@@ -40,9 +40,9 @@ void GameLoop::Loop::game()
     std::unique_ptr<EventSystem::Event> event(new EventSystem::KeyBoardEvent);
     std::unique_ptr<Scenario::Script> boardScript(new Scenario::BoardScript);
 
-    event->addListener(EventSystem::KEY::UP, new Action::Game::RotateCommand);
-    event->addListener(EventSystem::KEY::DOWN, new Action::Game::DropCommand);
-    event->addListener(EventSystem::KEY::LEFT, new Action::Game::LeftCommand);
+    event->addListener(EventSystem::KEY::UP,    new Action::Game::RotateCommand);
+    event->addListener(EventSystem::KEY::DOWN,  new Action::Game::DropCommand);
+    event->addListener(EventSystem::KEY::LEFT,  new Action::Game::LeftCommand);
     event->addListener(EventSystem::KEY::RIGHT, new Action::Game::RightCommand);
 
     boardScript->start();
@@ -52,28 +52,27 @@ void GameLoop::Loop::game()
         Draw::window()->drawGame();
 
         event->invoke(static_cast<EventSystem::KEY>(Draw::window()->input()));
-
         Map::board().update();
+
         if (Map::board().getGameOver())
             break;
 
         // Auto drop down and check If can't do it
         if (!event->invoke(EventSystem::KEY::DOWN))
-        {
             boardScript->update();
-        }
-
         Map::board().update();
     }
 
+    Map::board().theEndOfGame();
+    Map::board().update();
     event->delAllListeners();
 
     // player->saveScore() and set 0
 }
 
-void GameLoop::Loop::quite() 
-{ 
-    exit = true; 
+void GameLoop::Loop::quite()
+{
+    exit = true;
 }
 
 GameLoop::Loop &GameLoop::loop()

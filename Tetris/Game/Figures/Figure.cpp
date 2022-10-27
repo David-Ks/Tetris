@@ -41,13 +41,3 @@ Position Object::Figure::getPos() const
 {
     return position;
 }
-
-bool Object::Figure::operator==(const Figure& that) const
-{
-    const Position thisPos = this->getPos();
-    const Position thatPos = that.getPos();
-
-    if (thisPos.x == thatPos.x && thisPos.y == thatPos.y)
-        return true;
-    return false;
-}

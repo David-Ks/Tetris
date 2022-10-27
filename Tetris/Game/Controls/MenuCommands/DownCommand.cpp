@@ -1,4 +1,5 @@
 #include "DownCommand.hpp"
+#include "../../Graphics/Window.hpp"
 
 bool Action::Menu::DownCommand::isAvailable() const
 {

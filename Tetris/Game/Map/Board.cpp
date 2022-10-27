@@ -5,6 +5,7 @@
 #include "Board.hpp"
 #include "../Figures/Figure.hpp"
 #include "../Players/Player.cpp"
+#include "../Utils/Objects/Tools.cpp"
 
 Map::Board &Map::board()
 {
@@ -21,18 +22,18 @@ void Map::Board::update()
 {
     clean();
 
-    for (auto &figure : figures)
+    for (const auto &figure : figures)
     {
         if (!figure)
             continue;
 
-        for (auto &block : figure->blocks)
+        for (const auto &block : figure->blocks)
         {
             if (!block)
                 continue;
 
-            Position blockPos = block->getPos();
-            Position figurePos = figure->getPos();
+            const Position blockPos = block->getPos();
+            const Position figurePos = figure->getPos();
 
             map[blockPos.x + figurePos.x][blockPos.y + figurePos.y] = '#';
         }
@@ -52,21 +53,21 @@ void Map::Board::dropNotActiveFigures(const IndexList &fullLines)
     const int start = *std::min_element(fullLines.begin(), fullLines.end());
     const int count = fullLines.size();
 
-    for (auto &figure : figures)
+    for (const auto &figure : figures)
     {
         if (!figure)
             continue;
 
-        for (auto &block : figure->blocks)
+        for (const auto &block : figure->blocks)
         {
             if (!block)
                 continue;
 
-            if (figure->getPos().x + block->getPos().x <= start)
+            Position blockPos = block->getPos();
+            if (figure->getPos().x + blockPos.x <= start)
             {
-                Position newPos = block->getPos();
-                newPos.x += count;
-                block->setPos(newPos);
+                blockPos.x += count;
+                block->setPos(blockPos);
             }
         }
     }
@@ -74,23 +75,7 @@ void Map::Board::dropNotActiveFigures(const IndexList &fullLines)
 
 void Map::Board::theEndOfGame()
 {
-    setGameOver(true);
-    for (auto &figure : figures)
-    {
-        if (!figure)
-            continue;
-        for (auto &block : figure->blocks)
-        {
-            if (!block)
-                continue;
-            delete block;
-            block = 0;
-        }
-        delete figure;
-        figure = 0;
-    }
-    figures.clear();
-
+    Utils::Objects::clear(figures);
     delete nextFigure;
     nextFigure = 0;
 }
@@ -100,14 +85,11 @@ void Map::Board::addFigure()
     if (!getNextFigure())
         generateNextFigure();
 
-    Object::Figure *newFigure = getNextFigure();
-    
-    Position newPosition;
-    newPosition.x = 0;
-    newPosition.y = (Settings::weidth - 3) / 2; // Center
+    Position pos;
+    pos.x = 0;
+    pos.y = (Settings::weidth - 3) / 2; // Center
 
-    newFigure->setPos(newPosition);
-    figures.push_back(newFigure);
+    Utils::Objects::push(figures, getNextFigure(), pos);
     generateNextFigure();
 }
 
@@ -125,6 +107,7 @@ bool Map::Board::getGameOver() const
 {
     return gameOver;
 }
+
 void Map::Board::setGameOver(bool gameOver)
 {
     this->gameOver = gameOver;

@@ -1,4 +1,5 @@
 #include "SelectCommand.hpp"
+#include "../../Graphics/Window.hpp"
 
 bool Action::Menu::SelectCommand::isAvailable() const
 {

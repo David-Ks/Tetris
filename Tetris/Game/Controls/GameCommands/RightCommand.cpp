@@ -1,9 +1,14 @@
 #include "RightCommand.hpp"
+#include "../../Map/Board.hpp"
+#include "../../Utils/Objects/Tools.cpp"
 
 bool Action::Game::RightCommand::isAvailable() const
 {
     const MapMatrix map = Map::board().map;
-    const Object::Figure *figure = Map::board().figures.back();
+    const Object::Figure *figure = Utils::Objects::getlastItem(Map::board().figures);
+
+    if (!figure)
+        return false;
 
     for (const auto &block : figure->blocks)
     {
@@ -24,7 +29,7 @@ bool Action::Game::RightCommand::isAvailable() const
 
 bool Action::Game::RightCommand::execute()
 {
-    Object::Figure *figure = Map::board().figures.back();
+    Object::Figure *figure = Utils::Objects::getlastItem(Map::board().figures);
 
     Position newPos = figure->getPos();
     newPos.y++;

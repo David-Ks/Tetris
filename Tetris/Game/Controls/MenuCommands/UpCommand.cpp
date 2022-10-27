@@ -1,4 +1,5 @@
 #include "UpCommand.hpp"
+#include "../../Graphics/Window.hpp"
 
 bool Action::Menu::UpCommand::isAvailable() const
 {
