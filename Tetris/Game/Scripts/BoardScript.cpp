@@ -9,7 +9,6 @@
 #include <vector>
 #include <set>
 
-using IndexList = std::vector<int>;
 
 void Scenario::BoardScript::start()
 {
@@ -22,8 +21,6 @@ void Scenario::BoardScript::update()
     if (Map::board().getGameOver())
         return;
 
-    Map::board().addFigure();
-
     IndexList fullLines = getFullLines();
     if (!fullLines.empty())
     {
@@ -31,29 +28,39 @@ void Scenario::BoardScript::update()
         Map::board().dropNotActiveFigures(fullLines);
         User::player().addScore(fullLines.size());
     }
+
+    Map::board().addFigure();
 }
 
-IndexList Scenario::BoardScript::getFullLines()
+Scenario::BoardScript::ChangedLines Scenario::BoardScript::getChangedLines(const Object::Figure *lastDropedFigure)
 {
-    const static std::vector<char> fullLineExample(Settings::weidth, '#');
-    IndexList fullLines;
-    std::set<int> blockPoses;
+    const Position lastDropedFigurePos = lastDropedFigure->getPos();
 
-    const auto lastDropedFigure = Utils::Objects::getPenultItem(Map::board().figures);
-    const Position figurePos = lastDropedFigure->getPos();
-    if (!lastDropedFigure)
-        return fullLines;
-
+    Scenario::BoardScript::ChangedLines changedLines;
     for (auto &block : lastDropedFigure->blocks)
     {
         if (!block)
             continue;
 
         const Position blockPos = block->getPos();
-        blockPoses.insert(figurePos.x + blockPos.x);
+        changedLines.insert(lastDropedFigurePos.x + blockPos.x);
     }
 
-    for (const auto &position : blockPoses)
+    return changedLines;
+}
+
+Scenario::BoardScript::IndexList Scenario::BoardScript::getFullLines()
+{
+    const static std::vector<char> fullLineExample(Settings::weidth, '#');
+    IndexList fullLines;
+
+    const auto lastDropedFigure = Utils::Objects::getlastItem(Map::board().figures);
+    if (!lastDropedFigure)
+        return fullLines;
+
+    ChangedLines changedLines = getChangedLines(lastDropedFigure);
+
+    for (const auto &position : changedLines)
     {
         if (Map::board().map[position] == fullLineExample)
         {

@@ -18,6 +18,7 @@ bool Action::Game::RotateCommand::isAvailable() const
             continue;
 
         const Position figurePos = figure->getPos();
+
         const int rotateX = block->getPos().y;
         const int rotateY = getNewPos(block->getPos().x);
 
@@ -44,7 +45,6 @@ bool Action::Game::RotateCommand::execute()
             continue;
 
         Position blockPos = block->getPos();
-        Position figurePos = figure->getPos();
         Position newPos;
 
         newPos.x = blockPos.y;

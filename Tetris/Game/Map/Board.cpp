@@ -85,11 +85,10 @@ void Map::Board::addFigure()
     if (!getNextFigure())
         generateNextFigure();
 
-    Position pos;
-    pos.x = 0;
-    pos.y = (Settings::weidth - 3) / 2; // Center
+    constexpr int centerY = (Settings::weidth - 3) / 2;
+    constexpr Position figureStartPos {0, centerY};
 
-    Utils::Objects::push(figures, getNextFigure(), pos);
+    Utils::Objects::push(figures, getNextFigure(), figureStartPos);
     generateNextFigure();
 }
 

@@ -58,10 +58,6 @@ void Draw::NcursesWindow::drawGame()
     }
 
     mvprintw(centerHight + Settings::height - 1, centerWeidth, "T");
-    if (Map::board().getGameOver())
-        mvprintw(centerHight + Settings::height - 1, centerWeidth, "True");
-    else
-        mvprintw(centerHight + Settings::height - 1, centerWeidth, "False");
     for (int t = 0; t < Settings::weidth + 3; ++t)
         printw("T");
 

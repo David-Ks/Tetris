@@ -13,8 +13,6 @@
 #include "../Scripts/BoardScript.cpp"
 
 #include <memory>
-#include <set>
-#include <map>
 
 void GameLoop::Loop::menu()
 {
