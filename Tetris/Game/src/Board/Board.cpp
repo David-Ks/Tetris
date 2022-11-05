@@ -5,20 +5,20 @@
 #include "Board.hpp"
 #include "../Figures/Figure.hpp"
 #include "../Players/Player.cpp"
-#include "../Utils/Objects/Tools.cpp"
+#include "../../Utils/Objects/Tools.cpp"
 
-Map::Board &Map::board()
+Board &board()
 {
-    static Map::Board brd;
+    static Board brd;
     return brd;
 }
 
-Map::Board::Board() : gameOver(false)
+Board::Board() : gameOver(false)
 {
-    map = MapMatrix(Settings::height, std::vector<char>(Settings::weidth, 0));
+    map = BoardMatrix(Settings::height, std::vector<char>(Settings::weidth, 0));
 }
 
-void Map::Board::update()
+void Board::update()
 {
     clean();
 
@@ -40,7 +40,7 @@ void Map::Board::update()
     }
 }
 
-void Map::Board::clean()
+void Board::clean()
 {
     for (auto &row : map)
     {
@@ -48,7 +48,7 @@ void Map::Board::clean()
     }
 }
 
-void Map::Board::dropNotActiveFigures(const IndexList &fullLines)
+void Board::dropNotActiveFigures(const IndexList &fullLines)
 {
     const int start = *std::min_element(fullLines.begin(), fullLines.end());
     const int count = fullLines.size();
@@ -73,14 +73,14 @@ void Map::Board::dropNotActiveFigures(const IndexList &fullLines)
     }
 }
 
-void Map::Board::theEndOfGame()
+void Board::theEndOfGame()
 {
     Utils::Objects::clear(figures);
     delete nextFigure;
     nextFigure = 0;
 }
 
-void Map::Board::addFigure()
+void Board::addFigure()
 {
     if (!getNextFigure())
         generateNextFigure();
@@ -92,22 +92,22 @@ void Map::Board::addFigure()
     generateNextFigure();
 }
 
-Object::Figure *Map::Board::getNextFigure() const
+Object::Figure *Board::getNextFigure() const
 {
     return nextFigure;
 }
 
-void Map::Board::generateNextFigure()
+void Board::generateNextFigure()
 {
     nextFigure = new Object::Figure;
 }
 
-bool Map::Board::getGameOver() const
+bool Board::getGameOver() const
 {
     return gameOver;
 }
 
-void Map::Board::setGameOver(bool gameOver)
+void Board::setGameOver(bool gameOver)
 {
     this->gameOver = gameOver;
 }

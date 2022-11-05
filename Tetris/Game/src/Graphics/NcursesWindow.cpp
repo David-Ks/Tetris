@@ -1,6 +1,6 @@
 #include "NcursesWindow.hpp"
 #include "../Players/Player.hpp"
-#include "../Map/Board.cpp"
+#include "../Board/Board.cpp"
 #include "../Settings.cpp"
 
 #include <ncurses.h>
@@ -39,7 +39,7 @@ void Draw::NcursesWindow::drawMenu()
 
 void Draw::NcursesWindow::drawGame()
 {
-    MapMatrix map = Map::board().map;
+    BoardMatrix map = board().map;
 
     int centerHight = hight / 2 - Settings::height + 10;
     int centerWeidth = weidth / 2 - Settings::weidth;
@@ -67,7 +67,7 @@ void Draw::NcursesWindow::drawGame()
     mvprintw(centerHight + Settings::height + 1, centerWeidth, "Score: %d\n", User::player().getScore());
 
     char nextFigure[4][4];
-    for (auto &block : Map::board().getNextFigure()->blocks)
+    for (auto &block : board().getNextFigure()->blocks)
     {
         Position blockPos = block->getPos();
         nextFigure[blockPos.x][blockPos.y] = '#';

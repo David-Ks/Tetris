@@ -5,7 +5,7 @@
 
 #include "../Controls/Command.hpp"
 #include "../Graphics/Window.hpp"
-#include "../Map/Board.hpp"
+#include "../Board/Board.hpp"
 
 namespace EventSystem
 {

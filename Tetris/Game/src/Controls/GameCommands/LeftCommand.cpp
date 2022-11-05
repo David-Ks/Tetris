@@ -1,11 +1,11 @@
 #include "LeftCommand.hpp"
-#include "../../Map/Board.hpp"
-#include "../../Utils/Objects/Tools.cpp"
+#include "../../Board/Board.hpp"
+#include "../../../Utils/Objects/Tools.cpp"
 
 bool Action::Game::LeftCommand::isAvailable() const
 {
-    const MapMatrix map = Map::board().map;
-    const Object::Figure *figure = Utils::Objects::getlastItem(Map::board().figures);
+    const BoardMatrix map = board().map;
+    const Object::Figure *figure = Utils::Objects::getlastItem(board().figures);
 
     if (!figure)
         return false;
@@ -29,7 +29,7 @@ bool Action::Game::LeftCommand::isAvailable() const
 
 bool Action::Game::LeftCommand::execute()
 {
-    Object::Figure *figure = Utils::Objects::getlastItem(Map::board().figures);
+    Object::Figure *figure = Utils::Objects::getlastItem(board().figures);
 
     Position newPos = figure->getPos();
     newPos.y--;

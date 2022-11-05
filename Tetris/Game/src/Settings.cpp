@@ -2,7 +2,7 @@
 #define GAME_SETTINGS
 
 #include "Graphics/NcursesWindow.hpp"
-#include "Map/Board.hpp"
+#include "Board/Board.hpp"
 
 #include <vector>
 

@@ -9,7 +9,7 @@
 #include "../Controls/MenuCommands/DownCommand.cpp"
 #include "../Controls/MenuCommands/UpCommand.cpp"
 
-#include "../Map/Board.hpp"
+#include "../Board/Board.hpp"
 #include "../Scripts/BoardScript.cpp"
 
 #include <memory>
@@ -44,25 +44,25 @@ void GameLoop::Loop::game()
     event->addListener(EventSystem::KEY::RIGHT, new Action::Game::RightCommand);
 
     boardScript->start();
-    while (!Map::board().getGameOver())
+    while (!board().getGameOver())
     {
         Draw::window()->clean();
         Draw::window()->drawGame();
 
         event->invoke(static_cast<EventSystem::KEY>(Draw::window()->input()));
-        Map::board().update();
+        board().update();
 
-        if (Map::board().getGameOver())
+        if (board().getGameOver())
             break;
 
         // Auto drop down and check If can't do it
         if (!event->invoke(EventSystem::KEY::DOWN))
             boardScript->update();
-        Map::board().update();
+        board().update();
     }
 
-    Map::board().theEndOfGame();
-    Map::board().update();
+    board().theEndOfGame();
+    board().update();
     event->delAllListeners();
 
     // player->saveScore() and set 0

@@ -3,7 +3,7 @@
 #include "../Settings.cpp"
 #include "../Players/Player.hpp"
 #include "../Figures/Figure.hpp"
-#include "../Utils/Objects/Tools.cpp"
+#include "../../Utils/Objects/Tools.cpp"
 
 #include <algorithm>
 #include <vector>
@@ -12,24 +12,24 @@
 
 void Scenario::BoardScript::start()
 {
-    Map::board().addFigure();
-    Map::board().setGameOver(false);
+    board().addFigure();
+    board().setGameOver(false);
 }
 
 void Scenario::BoardScript::update()
 {
-    if (Map::board().getGameOver())
+    if (board().getGameOver())
         return;
 
     IndexList fullLines = getFullLines();
     if (!fullLines.empty())
     {
         cleanLines(fullLines);
-        Map::board().dropNotActiveFigures(fullLines);
+        board().dropNotActiveFigures(fullLines);
         User::player().addScore(fullLines.size());
     }
 
-    Map::board().addFigure();
+    board().addFigure();
 }
 
 Scenario::BoardScript::ChangedLines Scenario::BoardScript::getChangedLines(const Object::Figure *lastDropedFigure)
@@ -54,7 +54,7 @@ Scenario::BoardScript::IndexList Scenario::BoardScript::getFullLines()
     const static std::vector<char> fullLineExample(Settings::weidth, '#');
     IndexList fullLines;
 
-    const auto lastDropedFigure = Utils::Objects::getlastItem(Map::board().figures);
+    const auto lastDropedFigure = Utils::Objects::getlastItem(board().figures);
     if (!lastDropedFigure)
         return fullLines;
 
@@ -62,7 +62,7 @@ Scenario::BoardScript::IndexList Scenario::BoardScript::getFullLines()
 
     for (const auto &position : changedLines)
     {
-        if (Map::board().map[position] == fullLineExample)
+        if (board().map[position] == fullLineExample)
         {
             fullLines.push_back(position);
         }
@@ -73,7 +73,7 @@ Scenario::BoardScript::IndexList Scenario::BoardScript::getFullLines()
 
 void Scenario::BoardScript::cleanLines(const IndexList &fullLines)
 {
-    auto &figures = Map::board().figures;
+    auto &figures = board().figures;
     for (auto &figure : figures)
     {
         if (!figure)

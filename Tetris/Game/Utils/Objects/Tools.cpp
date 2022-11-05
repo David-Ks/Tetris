@@ -1,7 +1,7 @@
 #ifndef OBJECT_TOOL_CPP
 #define OBJECT_TOOL_CPP
 
-#include "../../Figures/Figure.hpp"
+#include "../../src/Figures/Figure.hpp"
 #include <vector>
 
 namespace Utils

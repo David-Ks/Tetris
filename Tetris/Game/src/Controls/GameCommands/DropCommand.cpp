@@ -1,12 +1,12 @@
 #include "DropCommand.hpp"
-#include "../../Map/Board.hpp"
-#include "../../Utils/Objects/Tools.cpp"
+#include "../../Board/Board.hpp"
+#include "../../../Utils/Objects/Tools.cpp"
 
 bool Action::Game::DropCommand::isAvailable() const
 {
-    const MapMatrix &map = Map::board().map;
+    const BoardMatrix &map = board().map;
     constexpr int minHightForGameOver = 4;
-    const Object::Figure *figure = Utils::Objects::getlastItem(Map::board().figures);
+    const Object::Figure *figure = Utils::Objects::getlastItem(board().figures);
 
     if (!figure)
         return false;
@@ -25,7 +25,7 @@ bool Action::Game::DropCommand::isAvailable() const
         if (map[PosX][PosY] == '#' || PosX >= Settings::height - 1)
         {
             if (PosX <= minHightForGameOver)
-                Map::board().setGameOver(true);
+                board().setGameOver(true);
 
             return false;
         }
@@ -35,7 +35,7 @@ bool Action::Game::DropCommand::isAvailable() const
 
 bool Action::Game::DropCommand::execute()
 {
-    Object::Figure *figure = Utils::Objects::getlastItem(Map::board().figures);
+    Object::Figure *figure = Utils::Objects::getlastItem(board().figures);
     
     Position newPos = figure->getPos();
     newPos.x++;

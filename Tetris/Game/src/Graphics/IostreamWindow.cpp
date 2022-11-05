@@ -1,6 +1,6 @@
 #include "IostreamWindow.hpp"
 #include "../Players/Player.hpp"
-#include "../Map/Board.cpp"
+#include "../Board/Board.cpp"
 #include "../Settings.cpp"
 
 #include <iostream>
@@ -16,7 +16,7 @@ void Draw::IostreamWindow::drawMenu()
 
 void Draw::IostreamWindow::drawGame()
 {
-    MapMatrix map = Map::board().map;
+    BoardMatrix map = board().map;
     for (int i = 0; i < Settings::height - 1; ++i)
     {
         std::cout << "||";

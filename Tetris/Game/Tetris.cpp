@@ -1,5 +1,5 @@
-#include "GameLoop/Loop.cpp"
-#include "Graphics/NcursesWindow.cpp"
+#include "src/GameLoop/Loop.cpp"
+#include "src/Graphics/NcursesWindow.cpp"
 
 class Tetris
 {
