@@ -27,7 +27,7 @@ bool Action::Game::RotateCommand::isAvailable() const
 
         if (rotateX + figurePos.x < 0 ||
             rotateY + figurePos.y < 0 ||
-            rotateY + figurePos.y >= Settings::weidth ||
+            rotateY + figurePos.y >= Settings::width ||
             map[rotateX + figurePos.x][rotateY + figurePos.y])
             return false;
     }

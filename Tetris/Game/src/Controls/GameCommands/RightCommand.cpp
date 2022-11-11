@@ -21,7 +21,7 @@ bool Action::Game::RightCommand::isAvailable() const
         if (figure->isOwnBlock(PosX, PosY))
             continue;
 
-        if (map[PosX][PosY] == '#' || PosY == Settings::weidth)
+        if (map[PosX][PosY] == '#' || PosY == Settings::width)
             return false;
     }
     return true;

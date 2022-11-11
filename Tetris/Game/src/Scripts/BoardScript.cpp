@@ -51,7 +51,7 @@ Scenario::BoardScript::ChangedLines Scenario::BoardScript::getChangedLines(const
 
 Scenario::BoardScript::IndexList Scenario::BoardScript::getFullLines()
 {
-    const static std::vector<char> fullLineExample(Settings::weidth, '#');
+    const static std::vector<char> fullLineExample(Settings::width, '#');
     IndexList fullLines;
 
     const auto lastDropedFigure = Utils::Objects::getlastItem(board().figures);

@@ -17,10 +17,10 @@ void Draw::IostreamWindow::drawMenu()
 void Draw::IostreamWindow::drawGame()
 {
     BoardMatrix map = board().map;
-    for (int i = 0; i < Settings::height - 1; ++i)
+    for (int i = 0; i < Settings::hight - 1; ++i)
     {
         std::cout << "||";
-        for (int j = 0; j < Settings::weidth; ++j)
+        for (int j = 0; j < Settings::width; ++j)
         {
             if (map[i][j] != '#')
                 std::cout << " ";
@@ -29,7 +29,7 @@ void Draw::IostreamWindow::drawGame()
         }
         std::cout << "||\n";
     }
-    for (int t = 0; t <= Settings::weidth + 3; ++t)
+    for (int t = 0; t <= Settings::width + 3; ++t)
         std::cout << "T";
 }
 

@@ -9,7 +9,7 @@ namespace Draw
     {
     private:
         int hight;
-        int weidth;
+        int width;
         
     public:
         NcursesWindow();

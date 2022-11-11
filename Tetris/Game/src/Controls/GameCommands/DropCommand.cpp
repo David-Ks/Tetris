@@ -22,7 +22,7 @@ bool Action::Game::DropCommand::isAvailable() const
         if (figure->isOwnBlock(PosX, PosY))
             continue;
 
-        if (map[PosX][PosY] == '#' || PosX >= Settings::height - 1)
+        if (map[PosX][PosY] == '#' || PosX >= Settings::hight - 1)
         {
             if (PosX <= minHightForGameOver)
                 board().setGameOver(true);

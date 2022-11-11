@@ -15,7 +15,7 @@ Board &board()
 
 Board::Board() : gameOver(false)
 {
-    map = BoardMatrix(Settings::height, std::vector<char>(Settings::weidth, 0));
+    map = BoardMatrix(Settings::hight, std::vector<char>(Settings::width, 0));
 }
 
 void Board::update()
@@ -85,7 +85,7 @@ void Board::addFigure()
     if (!getNextFigure())
         generateNextFigure();
 
-    constexpr int centerY = (Settings::weidth - 3) / 2;
+    constexpr int centerY = (Settings::width - 3) / 2;
     constexpr Position figureStartPos {0, centerY};
 
     Utils::Objects::push(figures, getNextFigure(), figureStartPos);
