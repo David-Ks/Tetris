@@ -10,7 +10,7 @@ namespace Action
         class RightCommand : public Command
         {
         public:
-            RightCommand() {}
+            RightCommand(Board &board) : Command(board) {}
 
         public:
             bool isAvailable() const;

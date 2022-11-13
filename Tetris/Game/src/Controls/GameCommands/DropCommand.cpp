@@ -1,12 +1,14 @@
 #include "DropCommand.hpp"
 #include "../../Board/Board.hpp"
-#include "../../../Utils/Objects/Tools.cpp"
+#include "../../../Utils/Objects/Tools.hpp"
+#include "../../Settings.hpp"
+
 
 bool Action::Game::DropCommand::isAvailable() const
 {
-    const BoardMatrix &map = board().map;
-    constexpr int minHightForGameOver = 4;
-    const Object::Figure *figure = Utils::Objects::getlastItem(board().figures);
+    const BoardMatrix &map = board.map;
+    constexpr int minHeightForGameOver = 4;
+    const Object::Figure *figure = Utils::Objects::getlastItem(board.figures);
 
     if (!figure)
         return false;
@@ -22,10 +24,10 @@ bool Action::Game::DropCommand::isAvailable() const
         if (figure->isOwnBlock(PosX, PosY))
             continue;
 
-        if (map[PosX][PosY] == '#' || PosX >= Settings::hight - 1)
+        if (map[PosX][PosY] == '#' || PosX >= Settings::height - 1)
         {
-            if (PosX <= minHightForGameOver)
-                board().setGameOver(true);
+            if (PosX <= minHeightForGameOver)
+                board.setGameOver(true);
 
             return false;
         }
@@ -35,7 +37,7 @@ bool Action::Game::DropCommand::isAvailable() const
 
 bool Action::Game::DropCommand::execute()
 {
-    Object::Figure *figure = Utils::Objects::getlastItem(board().figures);
+    Object::Figure *figure = Utils::Objects::getlastItem(board.figures);
     
     Position newPos = figure->getPos();
     newPos.x++;

@@ -1,7 +1,6 @@
 #ifndef GAME_SETTINGS
 #define GAME_SETTINGS
 
-#include "Graphics/NcursesWindow.hpp"
 #include "Board/Board.hpp"
 
 #include <vector>
@@ -10,7 +9,7 @@ namespace Settings
 {
     using TypeList = std::vector<std::vector<std::vector<int>>>; // 3D
 
-    constexpr static int hight = 30;
+    constexpr static int height = 30;
     constexpr static int width = 12;
 
     // Must fit in a 4x4 matrix
@@ -24,11 +23,5 @@ namespace Settings
         {{1, 2}, {2, 1}, {2, 2}, {2, 3}}};
 
 } // namespace Settings
-
-Draw::Window *Draw::window()
-{
-    static Draw::Window *win = new Draw::NcursesWindow;
-    return win;
-}
 
 #endif

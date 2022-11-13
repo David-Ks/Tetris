@@ -2,7 +2,6 @@
 #define SELECT_COMMAND_HPP
 
 #include "../Command.hpp"
-#include "../../GameLoop/Loop.hpp"
 
 namespace Action
 {
@@ -11,7 +10,7 @@ namespace Action
         class SelectCommand : public Command
         {
         public:
-            SelectCommand() {}
+            SelectCommand(Draw::Window *win, Board &board) : Command(win, board) {}
 
         public:
             bool isAvailable() const;

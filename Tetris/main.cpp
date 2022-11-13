@@ -1,9 +1,8 @@
-#include "Game/Tetris.cpp"
+#include "Game/Tetris.hpp"
 
 int main()
 {
-    Tetris game;
-    game.run();
+    Tetris::menu();
 
     return 0;
 }

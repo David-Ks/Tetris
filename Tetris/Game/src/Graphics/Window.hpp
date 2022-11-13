@@ -1,6 +1,9 @@
 #ifndef WINDOW_HPP
 #define WINDOW_HPP
 
+#include "../Board/Board.hpp"
+#include "../Players/Player.hpp"
+
 #include <vector>
 #include <string>
 
@@ -20,34 +23,42 @@ namespace Draw
     class Window
     {
     protected:
-        Section section;
-    
-    public:
-        static const MenuList menu;
+        const Board &board;
+        const User::Player &player;
+        mutable Section section;
 
     public:
-        Window() : section(Section::PLAY) {}
+        const MenuList menu;
+
+    public:
+        Window(const Board &board, const User::Player &player) : 
+            section(Section::PLAY), 
+            board(board),
+            player(player),
+            menu({
+                    "Play",
+                    "Settings",
+                    "Records",
+                    "Exit"
+                })
+            {
+                init();
+            }
         virtual ~Window() {}
 
     public:
-        virtual void drawMenu() = 0;
-        virtual void drawGame() = 0;
+        virtual void init() {};
+
+        virtual void drawMenu() const = 0;
+        virtual void drawGame() const = 0;
+        
         virtual void clean() = 0;
         virtual PressedKey input() = 0;
     
     public:
-        void setSection(Section section) { this->section = section; }
+        void setSection(Section section) const { this->section = section; }
         Section getSection() const { return section; }
     };
-
-    const MenuList Window::menu = {
-        "Play",
-        "Settings",
-        "Records",
-        "Exit"
-    };
-
-    Window *window();
 } // namespace Draw
 
 #endif

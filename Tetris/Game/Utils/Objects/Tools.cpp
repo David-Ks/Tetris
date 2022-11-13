@@ -1,65 +1,53 @@
-#ifndef OBJECT_TOOL_CPP
-#define OBJECT_TOOL_CPP
+#include "Tools.hpp"
 
-#include "../../src/Figures/Figure.hpp"
-#include <vector>
-
-namespace Utils
+void Utils::Objects::push(std::vector<Object::Figure *> &_list, Object::Figure *obj, const Position pos)
 {
-    namespace Objects
+    obj->setPos(pos);
+    _list.push_back(obj);
+}
+
+void Utils::Objects::del(Object::Figure *&obj)
+{
+    for (auto &block : obj->blocks)
     {
-        void push(std::vector<Object::Figure *> &_list, Object::Figure *obj, Position pos)
-        {
-            obj->setPos(pos);
-            _list.push_back(obj);
-        }
+        if (!block)
+            continue;
 
-        void del(Object::Figure *&obj)
-        {
-            for (auto &block : obj->blocks)
-            {
-                if (!block)
-                    continue;
+        delete block;
+        block = 0;
+    }
 
-                delete block;
-                block = 0;
-            }
+    delete obj;
+    obj = 0;
+}
 
-            delete obj;
-            obj = 0;
-        }
+void Utils::Objects::clear(std::vector<Object::Figure *> &_list)
+{
+    for (auto &obj : _list)
+    {
+        if (!obj)
+            continue;
 
-        void clear(std::vector<Object::Figure *> &_list)
-        {
-            for (auto &obj : _list)
-            {
-                if (!obj)
-                    continue;
+        del(obj);
+    }
 
-                del(obj);
-            }
+    _list.clear();
+}
 
-            _list.clear();
-        }
+Object::Figure *Utils::Objects::getPenultItem(const std::vector<Object::Figure *> &_list)
+{
+    const int size = _list.size();
+    if (size > 1)
+        return _list[size - 2];
 
-        Object::Figure *getPenultItem(const std::vector<Object::Figure *> &_list)
-        {
-            const int size = _list.size();
-            if (size > 1)
-                return _list[size - 2];
+    return 0;
+}
 
-            return 0;
-        }
+Object::Figure *Utils::Objects::getlastItem(const std::vector<Object::Figure *> &_list)
+{
+    const int size = _list.size();
+    if (size > 0)
+        return _list[size - 1];
 
-        Object::Figure *getlastItem(const std::vector<Object::Figure *> &_list)
-        {
-            const int size = _list.size();
-            if (size > 0)
-                return _list[size - 1];
-
-            return 0;
-        }
-    } // namespace ObjectList
-} // namespace Object
-
-#endif
+    return 0;
+}

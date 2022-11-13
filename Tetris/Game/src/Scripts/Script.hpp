@@ -1,12 +1,21 @@
 #ifndef SCRIPT_HPP
 #define SCRIPT_HPP
 
+#include "../Board/Board.hpp"
+#include "../Players/Player.hpp"
+
 namespace Scenario
 {
     class Script
     {
+    protected:
+        Board &board;
+        User::Player &player;
+
     public:
-        Script() {}
+        Script(Board &board, User::Player &player) : 
+            board(board),
+            player(player) {}
         virtual ~Script() {}
 
     public:

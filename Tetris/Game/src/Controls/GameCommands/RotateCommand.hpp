@@ -10,7 +10,7 @@ namespace Action
         class RotateCommand : public Command
         {
         public:
-            RotateCommand() {}
+            RotateCommand(Board &board) : Command(board) {}
 
         public:
             bool isAvailable() const;

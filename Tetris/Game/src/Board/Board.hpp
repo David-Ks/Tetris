@@ -1,7 +1,7 @@
 #ifndef BOARD_HPP
 #define BOARD_HPP
 
-#include "../Figures/Figure.cpp"
+#include "../Figures/Figure.hpp"
 
 #include <vector>
 #include <string>
@@ -36,11 +36,11 @@ public:
     void addFigure();
     void generateNextFigure();
     Object::Figure *getNextFigure() const;
+    bool hasNextFigure() const;
 
 public:
-    bool getGameOver() const;
+    bool isGameOver() const;
     void setGameOver(bool);
 };
 
-Board &board();
 #endif

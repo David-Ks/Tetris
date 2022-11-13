@@ -10,7 +10,7 @@ namespace Action
         class DropCommand : public Command
         {
         public:
-            DropCommand() {}
+            DropCommand(Board &board) : Command(board) {}
 
         public:
             bool isAvailable() const;

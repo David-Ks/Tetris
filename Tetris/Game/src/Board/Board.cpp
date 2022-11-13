@@ -4,18 +4,14 @@
 
 #include "Board.hpp"
 #include "../Figures/Figure.hpp"
-#include "../Players/Player.cpp"
-#include "../../Utils/Objects/Tools.cpp"
+#include "../Players/Player.hpp"
+#include "../../Utils/Objects/Tools.hpp"
+#include "../Settings.hpp"
 
-Board &board()
+Board::Board() : gameOver(false), nextFigure(0)
 {
-    static Board brd;
-    return brd;
-}
-
-Board::Board() : gameOver(false)
-{
-    map = BoardMatrix(Settings::hight, std::vector<char>(Settings::width, 0));
+    map = BoardMatrix(Settings::height, std::vector<char>(Settings::width, ' '));
+    generateNextFigure();
 }
 
 void Board::update()
@@ -44,7 +40,7 @@ void Board::clean()
 {
     for (auto &row : map)
     {
-        std::fill(row.begin(), row.end(), 0);
+        std::fill(row.begin(), row.end(), ' ');
     }
 }
 
@@ -82,8 +78,10 @@ void Board::theEndOfGame()
 
 void Board::addFigure()
 {
-    if (!getNextFigure())
+    if (!hasNextFigure())
+    {
         generateNextFigure();
+    }
 
     constexpr int centerY = (Settings::width - 3) / 2;
     constexpr Position figureStartPos {0, centerY};
@@ -97,12 +95,21 @@ Object::Figure *Board::getNextFigure() const
     return nextFigure;
 }
 
+bool Board::hasNextFigure() const
+{
+    if (nextFigure)
+    {
+        return true;
+    }
+    return false;
+}
+
 void Board::generateNextFigure()
 {
     nextFigure = new Object::Figure;
 }
 
-bool Board::getGameOver() const
+bool Board::isGameOver() const
 {
     return gameOver;
 }

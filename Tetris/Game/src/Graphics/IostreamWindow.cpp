@@ -1,28 +1,30 @@
 #include "IostreamWindow.hpp"
+
 #include "../Players/Player.hpp"
-#include "../Board/Board.cpp"
-#include "../Settings.cpp"
+#include "../Board/Board.hpp"
+#include "../Settings.hpp"
 
 #include <iostream>
 
-void Draw::IostreamWindow::drawMenu()
+void Draw::IostreamWindow::drawMenu() const
 {
     for (int i = 0; i < menu.size(); ++i)
     {
         if (i == section)
+        {
             std::cout << "Your choice = " << menu[section] << std::endl;
+        }
     }
 }
 
-void Draw::IostreamWindow::drawGame()
+void Draw::IostreamWindow::drawGame() const
 {
-    BoardMatrix map = board().map;
-    for (int i = 0; i < Settings::hight - 1; ++i)
+    for (int i = 0; i < Settings::height - 1; ++i)
     {
         std::cout << "||";
         for (int j = 0; j < Settings::width; ++j)
         {
-            if (map[i][j] != '#')
+            if (board.map[i][j] != '#')
                 std::cout << " ";
             else
                 std::cout << "#";

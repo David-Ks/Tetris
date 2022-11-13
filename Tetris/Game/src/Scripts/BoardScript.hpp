@@ -12,18 +12,20 @@ namespace Scenario
     {
     public:
         using IndexList = std::vector<int>;
-        using ChangedLines = std::set<int>;
+        using NoRepitList = std::set<int>;
 
     public:
-        BoardScript() {}
-        ~BoardScript() {}
+        BoardScript(Board &board, User::Player &player) : Script(board, player) {}
 
     public:
         void start();
         void update();
 
     private:
-        ChangedLines getChangedLines(const Object::Figure *);
+        static bool isOnTheList(int, const IndexList &);
+        static void deleteFigureIfEmpty(int blocksCount, Object::Figure *&figure);
+
+        NoRepitList getChangedLines(const Object::Figure *);
         IndexList getFullLines();
         void cleanLines(const IndexList&);
     };

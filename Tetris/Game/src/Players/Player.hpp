@@ -24,8 +24,6 @@ namespace User
         int getScore() const;
         std::string getName() const;
     };
-
-    Player &player();
 } // namespace User
 
 #endif

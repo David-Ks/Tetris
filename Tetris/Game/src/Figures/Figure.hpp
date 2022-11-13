@@ -1,7 +1,7 @@
 #ifndef FIGURE_HPP
 #define FIGURE_HPP
 
-#include "items/Block.cpp"
+#include "items/Block.hpp"
 
 #include <vector>
 
