@@ -11,10 +11,10 @@ namespace EventSystem
         KeyBoardEvent() {}
     
     public:
-        void addListener(KEY key, Action::Command* command);
-        void delListener(KEY key);
+        void addListener(const KEY key, Action::Command* command);
+        void deleteListenerIfExists(const KEY key);
         void delAllListeners();
-        bool invoke(KEY key);
+        bool invoke(const KEY key);
     };
 } // namespace EventSystem
 

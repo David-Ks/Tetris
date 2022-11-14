@@ -1,15 +1,12 @@
 #include "KeyBoardEvent.hpp"
 
-void EventSystem::KeyBoardEvent::addListener(EventSystem::KEY key, Action::Command *command)
+void EventSystem::KeyBoardEvent::addListener(const EventSystem::KEY key, Action::Command *command)
 {
-    if (listeners.count(key))
-    {
-        delListener(key);
-    }
+    deleteListenerIfExists(key);
     listeners.insert({key, command});
 }
 
-void EventSystem::KeyBoardEvent::delListener(EventSystem::KEY key)
+void EventSystem::KeyBoardEvent::deleteListenerIfExists(const EventSystem::KEY key)
 {
     if (listeners.count(key))
     {
@@ -27,7 +24,7 @@ void EventSystem::KeyBoardEvent::delAllListeners()
     listeners.clear();
 }
 
-bool EventSystem::KeyBoardEvent::invoke(EventSystem::KEY key)
+bool EventSystem::KeyBoardEvent::invoke(const EventSystem::KEY key)
 {
     if (listeners.count(key))
     {

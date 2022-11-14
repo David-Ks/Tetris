@@ -83,7 +83,7 @@ void Draw::NcursesWindow::printBoard(const int height, const int width) const
         mvprintw(height + i, width, "||");
         for (int j = 0; j < Settings::width; ++j)
         {
-            addch(board.map[i][j]);
+            addch(board.matrix[i][j]);
         }
         printw("||\n");
     }

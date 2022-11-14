@@ -44,7 +44,7 @@ void Tetris::menu()
 void Tetris::game()
 {
     std::unique_ptr<EventSystem::Event> event(new EventSystem::KeyBoardEvent);
-    std::unique_ptr<Scenario::Script> boardScript(new Scenario::BoardScript(board, player));
+    std::unique_ptr<Script> boardScript(new BoardScript(board, player));
 
     event->addListener(EventSystem::KEY::UP,    new Action::Game::RotateCommand(board));
     event->addListener(EventSystem::KEY::DOWN,  new Action::Game::DropCommand(board));

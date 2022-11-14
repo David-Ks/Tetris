@@ -12,8 +12,8 @@ namespace Utils
         void del(Object::Figure *&obj);
         void clear(std::vector<Object::Figure *> &_list);
         Object::Figure *getPenultItem(const std::vector<Object::Figure *> &_list);
-        Object::Figure *getlastItem(const std::vector<Object::Figure *> &_list);
-    } // namespace ObjectList
-} // namespace Object
+        Object::Figure *getLastItem(const std::vector<Object::Figure *> &_list);
+    } // namespace Objects
+} // namespace Utils
 
 #endif

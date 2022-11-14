@@ -9,13 +9,13 @@
 #include <vector>
 #include <set>
 
-void Scenario::BoardScript::start()
+void BoardScript::start()
 {
     board.addFigure();
     board.setGameOver(false);
 }
 
-void Scenario::BoardScript::update()
+void BoardScript::update()
 {
     if (board.isGameOver())
         return;
@@ -31,7 +31,7 @@ void Scenario::BoardScript::update()
     board.addFigure();
 }
 
-Scenario::BoardScript::NoRepitList Scenario::BoardScript::getChangedLines(const Object::Figure *lastDropedFigure)
+BoardScript::NoRepitList BoardScript::getChangedLines(const Object::Figure *lastDropedFigure)
 {
     const Position lastDropedFigurePos = lastDropedFigure->getPos();
     
@@ -47,20 +47,20 @@ Scenario::BoardScript::NoRepitList Scenario::BoardScript::getChangedLines(const 
     return changedLines;
 }
 
-Scenario::BoardScript::IndexList Scenario::BoardScript::getFullLines()
+BoardScript::IndexList BoardScript::getFullLines()
 {
     const static std::vector<char> fullLineExample(Settings::width, '#');
     IndexList fullLines;
 
-    const auto lastDropedFigure = Utils::Objects::getlastItem(board.figures);
+    const auto lastDropedFigure = Utils::Objects::getLastItem(board.figures);
     if (!lastDropedFigure)
         return fullLines;
 
-    NoRepitList changedLines = getChangedLines(lastDropedFigure);
+   const NoRepitList changedLines = getChangedLines(lastDropedFigure);
 
     for (const auto &position : changedLines)
     {
-        if (board.map[position] == fullLineExample)
+        if (board.matrix[position] == fullLineExample)
         {
             fullLines.push_back(position);
         }
@@ -69,7 +69,7 @@ Scenario::BoardScript::IndexList Scenario::BoardScript::getFullLines()
     return fullLines;
 }
 
-void Scenario::BoardScript::cleanLines(const IndexList &fullLines)
+void BoardScript::cleanLines(const IndexList &fullLines)
 {
     for (auto &figure : board.figures)
     {
@@ -96,7 +96,7 @@ void Scenario::BoardScript::cleanLines(const IndexList &fullLines)
     }
 }
 
-bool Scenario::BoardScript::isOnTheList(int index, const IndexList &fullLines)
+bool BoardScript::isOnTheList(int index, const IndexList &fullLines)
 {
     if (std::find(fullLines.begin(), fullLines.end(), index) != fullLines.end())
     {
@@ -105,7 +105,7 @@ bool Scenario::BoardScript::isOnTheList(int index, const IndexList &fullLines)
     return false;
 }
 
-void Scenario::BoardScript::deleteFigureIfEmpty(int blocksCount, Object::Figure *&figure)
+void BoardScript::deleteFigureIfEmpty(int blocksCount, Object::Figure *&figure)
 {
     if (blocksCount == figure->blocks.size())
     {

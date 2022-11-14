@@ -43,7 +43,7 @@ Object::Figure *Utils::Objects::getPenultItem(const std::vector<Object::Figure *
     return 0;
 }
 
-Object::Figure *Utils::Objects::getlastItem(const std::vector<Object::Figure *> &_list)
+Object::Figure *Utils::Objects::getLastItem(const std::vector<Object::Figure *> &_list)
 {
     const int size = _list.size();
     if (size > 0)

@@ -4,24 +4,21 @@
 #include "../Board/Board.hpp"
 #include "../Players/Player.hpp"
 
-namespace Scenario
+class Script
 {
-    class Script
-    {
-    protected:
-        Board &board;
-        User::Player &player;
+protected:
+    Board &board;
+    User::Player &player;
 
-    public:
-        Script(Board &board, User::Player &player) : 
-            board(board),
-            player(player) {}
-        virtual ~Script() {}
+public:
+    Script(Board &board, User::Player &player) : 
+        board(board),
+        player(player) {}
+    virtual ~Script() {}
 
-    public:
-        virtual void start() = 0;
-        virtual void update() = 0;
-    };
-} // namespace Scenario
+public:
+    virtual void start() = 0;
+    virtual void update() = 0;
+};
 
 #endif

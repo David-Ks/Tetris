@@ -5,18 +5,18 @@
 #include "Board.hpp"
 #include "../Figures/Figure.hpp"
 #include "../Players/Player.hpp"
-#include "../../Utils/Objects/Tools.hpp"
 #include "../Settings.hpp"
+#include "../../Utils/Objects/Tools.hpp"
 
 Board::Board() : gameOver(false), nextFigure(0)
 {
-    map = BoardMatrix(Settings::height, std::vector<char>(Settings::width, ' '));
+    matrix = BoardMatrix(Settings::height, std::vector<char>(Settings::width, ' '));
     generateNextFigure();
 }
 
 void Board::update()
 {
-    clean();
+    cleanBoardMatrix();
 
     for (const auto &figure : figures)
     {
@@ -31,14 +31,14 @@ void Board::update()
             const Position blockPos = block->getPos();
             const Position figurePos = figure->getPos();
 
-            map[blockPos.x + figurePos.x][blockPos.y + figurePos.y] = '#';
+            matrix[blockPos.x + figurePos.x][blockPos.y + figurePos.y] = '#';
         }
     }
 }
 
-void Board::clean()
+void Board::cleanBoardMatrix()
 {
-    for (auto &row : map)
+    for (auto &row : matrix)
     {
         std::fill(row.begin(), row.end(), ' ');
     }
@@ -72,8 +72,7 @@ void Board::dropNotActiveFigures(const IndexList &fullLines)
 void Board::theEndOfGame()
 {
     Utils::Objects::clear(figures);
-    delete nextFigure;
-    nextFigure = 0;
+    Utils::Objects::del(nextFigure);
 }
 
 void Board::addFigure()

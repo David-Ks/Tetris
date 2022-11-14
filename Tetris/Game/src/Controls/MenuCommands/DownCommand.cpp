@@ -14,8 +14,7 @@ bool Action::Menu::DownCommand::isAvailable() const
 
 bool Action::Menu::DownCommand::execute()
 {
-    int menuCurrentSectionNumber = static_cast<int>(window->getSection());
-
+    const int menuCurrentSectionNumber = static_cast<int>(window->getSection());
     window->setSection(static_cast<Draw::Section>(menuCurrentSectionNumber + 1));
     return true;
 }

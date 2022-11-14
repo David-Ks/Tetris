@@ -6,9 +6,9 @@
 
 bool Action::Game::DropCommand::isAvailable() const
 {
-    const BoardMatrix &map = board.map;
+    const BoardMatrix &boardMatrix = board.matrix;
     constexpr int minHeightForGameOver = 4;
-    const Object::Figure *figure = Utils::Objects::getlastItem(board.figures);
+    const Object::Figure *figure = Utils::Objects::getLastItem(board.figures);
 
     if (!figure)
         return false;
@@ -24,7 +24,7 @@ bool Action::Game::DropCommand::isAvailable() const
         if (figure->isOwnBlock(PosX, PosY))
             continue;
 
-        if (map[PosX][PosY] == '#' || PosX >= Settings::height - 1)
+        if (boardMatrix[PosX][PosY] == '#' || PosX >= Settings::height - 1)
         {
             if (PosX <= minHeightForGameOver)
                 board.setGameOver(true);
@@ -37,7 +37,7 @@ bool Action::Game::DropCommand::isAvailable() const
 
 bool Action::Game::DropCommand::execute()
 {
-    Object::Figure *figure = Utils::Objects::getlastItem(board.figures);
+    Object::Figure *figure = Utils::Objects::getLastItem(board.figures);
     
     Position newPos = figure->getPos();
     newPos.x++;

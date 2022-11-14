@@ -15,13 +15,12 @@ private:
     using FigureList = std::vector<Object::Figure *>;
     using IndexList = std::vector<int>;
 
-private:
     bool gameOver;
     Object::Figure *nextFigure;
 
 public:
     FigureList figures;
-    BoardMatrix map;
+    BoardMatrix matrix;
 
 public:
     Board();
@@ -29,7 +28,7 @@ public:
 public:
     void dropNotActiveFigures(const IndexList &);
     void update();
-    void clean();
+    void cleanBoardMatrix();
     void theEndOfGame();
 
 public:

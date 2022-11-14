@@ -16,7 +16,6 @@ namespace Object
 
     public:
         BlockList blocks;
-        bool isRotatable;
 
     public:
         Figure();

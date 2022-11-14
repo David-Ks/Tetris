@@ -4,8 +4,8 @@
 
 bool Action::Game::LeftCommand::isAvailable() const
 {
-    const BoardMatrix map = board.map;
-    const Object::Figure *figure = Utils::Objects::getlastItem(board.figures);
+    const BoardMatrix boardMatrix = board.matrix;
+    const Object::Figure *figure = Utils::Objects::getLastItem(board.figures);
 
     if (!figure)
         return false;
@@ -21,7 +21,7 @@ bool Action::Game::LeftCommand::isAvailable() const
         if (figure->isOwnBlock(PosX, PosY))
             continue;
 
-        if (map[PosX][PosY] == '#' || PosY < 0)
+        if (boardMatrix[PosX][PosY] == '#' || PosY < 0)
             return false;
     }
     return true;
@@ -29,7 +29,7 @@ bool Action::Game::LeftCommand::isAvailable() const
 
 bool Action::Game::LeftCommand::execute()
 {
-    Object::Figure *figure = Utils::Objects::getlastItem(board.figures);
+    Object::Figure *figure = Utils::Objects::getLastItem(board.figures);
 
     Position newPos = figure->getPos();
     newPos.y--;

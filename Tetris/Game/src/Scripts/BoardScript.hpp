@@ -6,30 +6,26 @@
 #include <vector>
 #include <set>
 
-namespace Scenario
+class BoardScript : public Script
 {
-    class BoardScript : public Script
-    {
-    public:
-        using IndexList = std::vector<int>;
-        using NoRepitList = std::set<int>;
+public:
+    using IndexList = std::vector<int>;
+    using NoRepitList = std::set<int>;
 
-    public:
-        BoardScript(Board &board, User::Player &player) : Script(board, player) {}
+public:
+    BoardScript(Board &board, User::Player &player) : Script(board, player) {}
 
-    public:
-        void start();
-        void update();
+public:
+    void start();
+    void update();
 
-    private:
-        static bool isOnTheList(int, const IndexList &);
-        static void deleteFigureIfEmpty(int blocksCount, Object::Figure *&figure);
+private:
+    static bool isOnTheList(int, const IndexList &);
+    static void deleteFigureIfEmpty(int blocksCount, Object::Figure *&figure);
 
-        NoRepitList getChangedLines(const Object::Figure *);
-        IndexList getFullLines();
-        void cleanLines(const IndexList&);
-    };
-} // namespace Scenario
-
+    NoRepitList getChangedLines(const Object::Figure *);
+    IndexList getFullLines();
+    void cleanLines(const IndexList &);
+};
 
 #endif

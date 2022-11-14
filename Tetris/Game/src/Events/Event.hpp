@@ -28,10 +28,10 @@ namespace EventSystem
         virtual ~Event() {}
 
     public:
-        virtual void addListener(KEY key, Action::Command *command) = 0;
-        virtual void delListener(KEY key) = 0;
+        virtual void addListener(const KEY key, Action::Command *command) = 0;
+        virtual void deleteListenerIfExists(const KEY key) = 0;
         virtual void delAllListeners() = 0;
-        virtual bool invoke(KEY key) = 0;
+        virtual bool invoke(const KEY key) = 0;
     };
 } // namespace Action
 

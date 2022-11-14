@@ -24,7 +24,7 @@ void Draw::IostreamWindow::drawGame() const
         std::cout << "||";
         for (int j = 0; j < Settings::width; ++j)
         {
-            if (board.map[i][j] != '#')
+            if (board.matrix[i][j] != '#')
                 std::cout << " ";
             else
                 std::cout << "#";

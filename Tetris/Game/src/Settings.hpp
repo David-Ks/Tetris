@@ -7,9 +7,10 @@
 
 namespace Settings
 {
-    using TypeList = std::vector<std::vector<std::vector<int>>>; // 3D
+    using FigureType = std::vector<std::vector<int>>;
+    using TypeList = std::vector<FigureType>; // 3D
 
-    constexpr static int height = 30;
+    constexpr static int height = 20;
     constexpr static int width = 12;
 
     // Must fit in a 4x4 matrix
