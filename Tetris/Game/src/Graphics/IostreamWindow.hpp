@@ -15,8 +15,10 @@ namespace Draw
     public:
         void drawMenu() const;
         void drawGame() const;
-        void clean();
-        PressedKey input();
+        void drawRecrodList() const;
+        
+        void clean() const;
+        PressedKey input() const;
     };
 } // namespace Draw
 

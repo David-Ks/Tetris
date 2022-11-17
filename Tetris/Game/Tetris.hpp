@@ -10,14 +10,18 @@ class Tetris
 private:
     static User::Player player;
     static Board board;
-    static Draw::Window *window;
     static bool exit;
 
 public:
     static void quit();
     
     static void menu();
-    static void game();
+    static void game(const Draw::Window *window);
+
+private:
+    static void setPlayer(const Draw::Window *window);
+    static void settings(const Draw::Window *window);
+    static void records(const Draw::Window *window);
 
 private:
     static bool isRunned();

@@ -18,7 +18,7 @@ namespace Action
 
         private:
             static Position getNewRotatedPos(const Position blockPosition);
-            bool isFreePosition(const int x, const int y) const;
+            bool isFreePosition(const Position &position) const;
         };
     } // namespace Game
 

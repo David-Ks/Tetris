@@ -14,29 +14,7 @@ Board::Board() : gameOver(false), nextFigure(0)
     generateNextFigure();
 }
 
-void Board::update()
-{
-    cleanBoardMatrix();
-
-    for (const auto &figure : figures)
-    {
-        if (!figure)
-            continue;
-
-        for (const auto &block : figure->blocks)
-        {
-            if (!block)
-                continue;
-
-            const Position blockPos = block->getPos();
-            const Position figurePos = figure->getPos();
-
-            matrix[blockPos.x + figurePos.x][blockPos.y + figurePos.y] = '#';
-        }
-    }
-}
-
-void Board::cleanBoardMatrix()
+void Board::cleanMatrix()
 {
     for (auto &row : matrix)
     {
@@ -54,6 +32,8 @@ void Board::dropNotActiveFigures(const IndexList &fullLines)
         if (!figure)
             continue;
 
+        removeFigure(figure);
+
         for (const auto &block : figure->blocks)
         {
             if (!block)
@@ -66,6 +46,8 @@ void Board::dropNotActiveFigures(const IndexList &fullLines)
                 block->setPos(blockPos);
             }
         }
+
+        insertFigure(figure);
     }
 }
 
@@ -73,6 +55,7 @@ void Board::theEndOfGame()
 {
     Utils::Objects::clear(figures);
     Utils::Objects::del(nextFigure);
+    cleanMatrix();
 }
 
 void Board::addFigure()
@@ -83,9 +66,12 @@ void Board::addFigure()
     }
 
     constexpr int centerY = (Settings::width - 3) / 2;
-    constexpr Position figureStartPos {0, centerY};
+    constexpr Position figureStartPos{0, centerY};
 
-    Utils::Objects::push(figures, getNextFigure(), figureStartPos);
+    auto *nextFigure = getNextFigure();
+
+    Utils::Objects::push(figures, nextFigure, figureStartPos);
+    insertFigure(nextFigure);
     generateNextFigure();
 }
 
@@ -118,3 +104,66 @@ void Board::setGameOver(bool gameOver)
     this->gameOver = gameOver;
 }
 
+void Board::removeFigure(const Object::Figure *figure)
+{
+    constexpr char cleanSymbol = ' ';
+    setFigureSymbols(figure, cleanSymbol); 
+}
+
+void Board::removeBlock(const Position &position)
+{
+    constexpr char cleanSymbol = ' ';
+    setSymbol(position, cleanSymbol);
+}
+
+void Board::insertFigure(const Object::Figure *figure)
+{
+    constexpr char figureSymbol = '#'; // figure->getSymbol
+    setFigureSymbols(figure, figureSymbol); 
+}
+
+void Board::setFigureSymbols(const Object::Figure *figure, const char symbol)
+{
+    if (!figure)
+        return;
+
+    for (const auto &block : figure->blocks)
+    {
+        if (!block)
+            continue;
+
+        const Position absPosition {block->getPos().x + figure->getPos().x,
+                                    block->getPos().y + figure->getPos().y};
+
+        setSymbol(absPosition, symbol);
+    }
+}
+
+void Board::setSymbol(const Position &position, const char symbol)
+{
+    matrix[position.x][position.y] = symbol;
+}
+
+bool Board::isFreePosition(const Position &position) const
+{
+    if (matrix[position.x][position.y] != ' ')
+    {
+        return false;
+    }
+    return true;
+}
+
+bool Board::isFullLine(const int row) const
+{
+    const static std::vector<char> fullLineExample(Settings::width, '#');
+    if (matrix[row] == fullLineExample)
+    {
+        return true;
+    }
+    return false;
+}
+
+BoardMatrix Board::getMatrix() const
+{
+    return matrix;
+}

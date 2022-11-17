@@ -21,7 +21,7 @@ namespace Object
         Figure();
 
     public:
-        bool isOwnBlock(int x, int y) const;
+        bool isOwnBlock(const Position &position) const;
         void setPos(Position position);
         Position getPos() const;
     };

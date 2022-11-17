@@ -12,6 +12,8 @@ void Draw::NcursesWindow::init()
     curs_set(0);
     keypad(stdscr, true);
     getmaxyx(stdscr, height, width);
+    halfdelay(5);
+    noecho();
 }
 
 Draw::NcursesWindow::~NcursesWindow()
@@ -47,16 +49,15 @@ void Draw::NcursesWindow::drawGame() const
     printNextFigure(centerHeight, centerWidth);
 }
 
-void Draw::NcursesWindow::clean()
+void Draw::NcursesWindow::clean() const
 {
     clear();
     refresh();
 }
 
-PressedKey Draw::NcursesWindow::input()
+PressedKey Draw::NcursesWindow::input() const
 {
-    halfdelay(5);
-    char ch = getch();
+    const char ch = getch();
     return ch;
 }
 
@@ -78,12 +79,13 @@ void Draw::NcursesWindow::printBoardBottom(const int height, const int width) co
 
 void Draw::NcursesWindow::printBoard(const int height, const int width) const
 {
+    const auto matrix = board.getMatrix();
     for (int i = 0; i < Settings::height - 1; ++i)
     {
         mvprintw(height + i, width, "||");
         for (int j = 0; j < Settings::width; ++j)
         {
-            addch(board.matrix[i][j]);
+            addch(matrix[i][j]);
         }
         printw("||\n");
     }

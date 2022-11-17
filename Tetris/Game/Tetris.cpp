@@ -19,15 +19,15 @@ bool Tetris::exit = false;
 
 User::Player Tetris::player;
 Board Tetris::board;
-Draw::Window *Tetris::window = new Draw::NcursesWindow(board, player);
 
 void Tetris::menu()
 {
+    std::unique_ptr<Draw::Window> window(new Draw::NcursesWindow(board, player));
     std::unique_ptr<EventSystem::KeyBoardEvent> event(new EventSystem::KeyBoardEvent);
 
-    event->addListener(EventSystem::KEY::UP,    new Action::Menu::UpCommand(window, board));
-    event->addListener(EventSystem::KEY::DOWN,  new Action::Menu::DownCommand(window, board));
-    event->addListener(EventSystem::KEY::ENTER, new Action::Menu::SelectCommand(window, board));
+    event->addListener(EventSystem::KEY::UP,    new Action::Menu::UpCommand(window.get(), board));
+    event->addListener(EventSystem::KEY::DOWN,  new Action::Menu::DownCommand(window.get(), board));
+    event->addListener(EventSystem::KEY::ENTER, new Action::Menu::SelectCommand(window.get(), board));
 
     while (isRunned())
     {
@@ -38,10 +38,9 @@ void Tetris::menu()
     }
 
     event->delAllListeners();
-    delete window;
 }
 
-void Tetris::game()
+void Tetris::game(const Draw::Window *window)
 {
     std::unique_ptr<EventSystem::Event> event(new EventSystem::KeyBoardEvent);
     std::unique_ptr<Script> boardScript(new BoardScript(board, player));
@@ -58,7 +57,6 @@ void Tetris::game()
         window->drawGame();
 
         event->invoke(static_cast<EventSystem::KEY>(window->input()));
-        board.update();
 
         if (board.isGameOver())
             break;
@@ -66,14 +64,31 @@ void Tetris::game()
         // Auto drop down and check If can't do it
         if (!event->invoke(EventSystem::KEY::DOWN))
             boardScript->update();
-        board.update();
     }
 
+    player.saveScore();
     board.theEndOfGame();
-    board.update();
 
     event->delAllListeners();
-    player.saveScore();
+}
+
+void Tetris::records(const Draw::Window *window)
+{
+    std::unique_ptr<EventSystem::Event> event(new EventSystem::KeyBoardEvent);
+
+    event->addListener(EventSystem::KEY::UP,    new Action::Menu::UpCommand(window, board));
+    event->addListener(EventSystem::KEY::DOWN,  new Action::Menu::DownCommand(window, board));
+    event->addListener(EventSystem::KEY::ENTER, new Action::Menu::SelectCommand(window, board));
+
+    while (isRunned())
+    {
+        window->clean();
+        window->drawRecrodList();
+
+        event->invoke(static_cast<EventSystem::KEY>(window->input()));
+    }
+
+    event->delAllListeners();
 }
 
 bool Tetris::isRunned()

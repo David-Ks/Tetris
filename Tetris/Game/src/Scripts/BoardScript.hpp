@@ -20,7 +20,7 @@ public:
     void update();
 
 private:
-    static bool isOnTheList(int, const IndexList &);
+    static bool inList(int, const IndexList &);
     static void deleteFigureIfEmpty(int blocksCount, Object::Figure *&figure);
 
     NoRepitList getChangedLines(const Object::Figure *);

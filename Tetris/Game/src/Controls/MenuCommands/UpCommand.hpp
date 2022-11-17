@@ -10,7 +10,7 @@ namespace Action
         class UpCommand : public Command
         {
         public:
-            UpCommand(Draw::Window *win, Board &board) : Command(win, board) {}
+            UpCommand(const Draw::Window *win, Board &board) : Command(win, board) {}
 
         public:
             bool isAvailable() const;

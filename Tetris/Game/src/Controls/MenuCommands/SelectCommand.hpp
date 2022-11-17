@@ -10,7 +10,7 @@ namespace Action
         class SelectCommand : public Command
         {
         public:
-            SelectCommand(Draw::Window *win, Board &board) : Command(win, board) {}
+            SelectCommand(const Draw::Window *win, Board &board) : Command(win, board) {}
 
         public:
             bool isAvailable() const;

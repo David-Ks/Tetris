@@ -10,7 +10,7 @@ namespace Utils
     {
         using FileContent = std::vector<std::string>;
 
-        const std::string path = "Game/cache/";
+        const std::string path = "Game/other/";
 
         FileContent read(const std::string &fileName);
         void write(const std::string &fileName, const std::string &line, const int row);

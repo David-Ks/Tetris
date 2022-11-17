@@ -51,9 +51,10 @@ namespace Draw
 
         virtual void drawMenu() const = 0;
         virtual void drawGame() const = 0;
+        virtual void drawRecrodList() const = 0;
         
-        virtual void clean() = 0;
-        virtual PressedKey input() = 0;
+        virtual void clean() const = 0;
+        virtual PressedKey input() const = 0;
     
     public:
         void setSection(Section section) const { this->section = section; }

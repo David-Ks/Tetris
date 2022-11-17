@@ -15,7 +15,7 @@ Object::Figure::Figure()
     }
 }
 
-bool Object::Figure::isOwnBlock(int x, int y) const
+bool Object::Figure::isOwnBlock(const Position &position) const
 {
     for (const auto &block : blocks)
     {
@@ -23,7 +23,8 @@ bool Object::Figure::isOwnBlock(int x, int y) const
             continue;
 
         const Position blockPosition = block->getPos();
-        if (blockPosition.x + position.x == x && blockPosition.y + position.y == y)
+        if (blockPosition.x + this->position.x == position.x &&
+            blockPosition.y + this->position.y == position.y)
             return true;
     }
     return false;

@@ -19,12 +19,13 @@ void Draw::IostreamWindow::drawMenu() const
 
 void Draw::IostreamWindow::drawGame() const
 {
+    const auto matrix = board.getMatrix();
     for (int i = 0; i < Settings::height - 1; ++i)
     {
         std::cout << "||";
         for (int j = 0; j < Settings::width; ++j)
         {
-            if (board.matrix[i][j] != '#')
+            if (matrix[i][j] != '#')
                 std::cout << " ";
             else
                 std::cout << "#";
@@ -35,12 +36,12 @@ void Draw::IostreamWindow::drawGame() const
         std::cout << "T";
 }
 
-void Draw::IostreamWindow::clean()
+void Draw::IostreamWindow::clean() const
 {
     std::cout << "Just clean window ;)\n";
 }
 
-PressedKey Draw::IostreamWindow::input()
+PressedKey Draw::IostreamWindow::input() const
 {
     int action;
     std::cin >> action;

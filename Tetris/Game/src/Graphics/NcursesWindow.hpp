@@ -19,10 +19,13 @@ namespace Draw
     
     public:
         void init();
+        
         void drawMenu() const;
         void drawGame() const;
-        void clean();
-        PressedKey input();
+        void drawRecrodList() const;
+
+        void clean() const;
+        PressedKey input() const;
 
     private:
         void printPlayerInfo(const int height, const int width) const;

@@ -14,7 +14,7 @@ bool Action::Menu::SelectCommand::execute()
     switch (menuCurrentSection)
     {
     case Draw::Section::PLAY:
-        Tetris::game();
+        Tetris::game(window);
         break;
     case Draw::Section::EXIT:
         Tetris::quit();

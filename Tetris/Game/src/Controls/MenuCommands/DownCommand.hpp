@@ -10,7 +10,7 @@ namespace Action
         class DownCommand : public Command
         {
         public:
-            DownCommand(Draw::Window *win, Board &board) : Command(win, board) {}
+            DownCommand(const Draw::Window *win, Board &board) : Command(win, board) {}
 
         public:
             bool isAvailable() const;

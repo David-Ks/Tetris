@@ -34,7 +34,7 @@ void BoardScript::update()
 BoardScript::NoRepitList BoardScript::getChangedLines(const Object::Figure *lastDropedFigure)
 {
     const Position lastDropedFigurePos = lastDropedFigure->getPos();
-    
+
     NoRepitList changedLines;
     for (const auto &block : lastDropedFigure->blocks)
     {
@@ -49,20 +49,18 @@ BoardScript::NoRepitList BoardScript::getChangedLines(const Object::Figure *last
 
 BoardScript::IndexList BoardScript::getFullLines()
 {
-    const static std::vector<char> fullLineExample(Settings::width, '#');
     IndexList fullLines;
-
     const auto lastDropedFigure = Utils::Objects::getLastItem(board.figures);
     if (!lastDropedFigure)
         return fullLines;
 
-   const NoRepitList changedLines = getChangedLines(lastDropedFigure);
+    const NoRepitList changedLines = getChangedLines(lastDropedFigure);
 
-    for (const auto &position : changedLines)
+    for (const auto &lineNumber : changedLines)
     {
-        if (board.matrix[position] == fullLineExample)
+        if (board.isFullLine(lineNumber))
         {
-            fullLines.push_back(position);
+            fullLines.push_back(lineNumber);
         }
     }
 
@@ -85,8 +83,12 @@ void BoardScript::cleanLines(const IndexList &fullLines)
                 continue;
             }
 
-            if (isOnTheList(figure->getPos().x + block->getPos().x, fullLines))
+            const Position absPosition{block->getPos().x + figure->getPos().x,
+                                       block->getPos().y + figure->getPos().y};
+
+            if (inList(absPosition.x, fullLines))
             {
+                board.removeBlock(absPosition);
                 delete block;
                 block = 0;
             }
@@ -96,7 +98,7 @@ void BoardScript::cleanLines(const IndexList &fullLines)
     }
 }
 
-bool BoardScript::isOnTheList(int index, const IndexList &fullLines)
+bool BoardScript::inList(int index, const IndexList &fullLines)
 {
     if (std::find(fullLines.begin(), fullLines.end(), index) != fullLines.end())
     {

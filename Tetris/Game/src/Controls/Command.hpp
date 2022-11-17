@@ -14,7 +14,7 @@ namespace Action
 
     public:
         Command(Board &board) : board(board), window(0) {}
-        Command(Draw::Window *win, Board &board) : window(win), board(board) {}
+        Command(const Draw::Window *win, Board &board) : window(win), board(board) {}
         virtual ~Command() {}
 
     public:

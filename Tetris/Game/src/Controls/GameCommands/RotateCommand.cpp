@@ -16,12 +16,12 @@ bool Action::Game::RotateCommand::isAvailable() const
 
         const Position figurePos = figure->getPos();
         const Position newRotatedBlockPos = getNewRotatedPos(block->getPos());
-        const Position absFigurePos{newRotatedBlockPos.x + figurePos.x, newRotatedBlockPos.y + figurePos.y};
+        const Position absPosition{newRotatedBlockPos.x + figurePos.x, newRotatedBlockPos.y + figurePos.y};
 
-        if (figure->isOwnBlock(absFigurePos.x, absFigurePos.y))
+        if (figure->isOwnBlock(absPosition))
             continue;
 
-        if (!isFreePosition(absFigurePos.x, absFigurePos.y))
+        if (!isFreePosition(absPosition))
             return false;
     }
 
@@ -32,6 +32,8 @@ bool Action::Game::RotateCommand::execute()
 {
     Object::Figure *figure = Utils::Objects::getLastItem(board.figures);
 
+    board.removeFigure(figure);
+
     for (auto &block : figure->blocks)
     {
         if (!block)
@@ -39,6 +41,9 @@ bool Action::Game::RotateCommand::execute()
 
         block->setPos(getNewRotatedPos(block->getPos()));
     }
+
+    board.insertFigure(figure);
+
     return true;
 }
 
@@ -66,9 +71,9 @@ Position Action::Game::RotateCommand::getNewRotatedPos(const Position blockPosit
     return newPos;
 }
 
-bool Action::Game::RotateCommand::isFreePosition(const int x, const int y) const
+bool Action::Game::RotateCommand::isFreePosition(const Position &position) const
 {
-    if (x < 0 || y < 0 || y >= Settings::width || board.matrix[x][y] != ' ')
+    if (position.x < 0 || position.y < 0 || position.y >= Settings::width || !board.isFreePosition(position))
     {
         return false;
     }
