@@ -73,8 +73,7 @@ void Tetris::game()
     board.update();
 
     event->delAllListeners();
-
-    // player->saveScore() and set 0
+    player.saveScore();
 }
 
 bool Tetris::isRunned()

@@ -2,11 +2,13 @@
 
 #include <fstream>
 #include <string>
+#include <iostream>
 
 Utils::Files::FileContent Utils::Files::read(const std::string &fileName)
 {
     FileContent text;
-    std::ifstream file(fileName, std::ios::in);
+    std::fstream file;
+    file.open(path + fileName, std::ios::in);
     if (file.is_open())
     {
         std::string line;
@@ -20,14 +22,20 @@ Utils::Files::FileContent Utils::Files::read(const std::string &fileName)
     return text;
 }
 
-// need to append on correct row
+void Utils::Files::write(const std::string &fileName, const std::string &line, const int row)
+{
+    FileContent text = read(fileName);
+    text.emplace(text.begin() + row, line);
 
-// void Utils::Files::append(const std::string &fileName, const std::string &content)
-// {
-//     std::ifstream file(fileName, std::ios::app);
-//     if (file.is_open())
-//     {
-//         file << content;
-//         file.close();
-//     }
-// }
+    std::fstream file;
+    file.open(path + fileName, std::ios::out);
+
+    if (file.is_open())
+    {
+        for (const auto &line : text)
+        {
+            file << line << std::endl;
+        }
+        file.close();
+    }
+}

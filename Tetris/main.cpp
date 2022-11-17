@@ -3,6 +3,5 @@
 int main()
 {
     Tetris::menu();
-
     return 0;
 }
