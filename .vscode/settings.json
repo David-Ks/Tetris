@@ -18,6 +18,7 @@
         "cwctype": "cpp",
         "deque": "cpp",
         "map": "cpp",
+        "set": "cpp",
         "string": "cpp",
         "unordered_map": "cpp",
         "vector": "cpp",
@@ -36,6 +37,8 @@
         "utility": "cpp",
         "initializer_list": "cpp",
         "iosfwd": "cpp",
+        "iostream": "cpp",
+        "istream": "cpp",
         "limits": "cpp",
         "new": "cpp",
         "numbers": "cpp",
@@ -43,10 +46,12 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp",
-        "iostream": "cpp",
-        "istream": "cpp",
-        "set": "cpp",
         "fstream": "cpp",
-        "ctime": "cpp"
+        "chrono": "cpp",
+        "codecvt": "cpp",
+        "ctime": "cpp",
+        "ratio": "cpp",
+        "iomanip": "cpp",
+        "sstream": "cpp"
     }
 }

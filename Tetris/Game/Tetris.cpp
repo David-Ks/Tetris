@@ -1,21 +1,18 @@
-#include "GameLoop/Loop.cpp"
-#include "Graphics/NcursesWindow.cpp"
+#include "Tetris.hpp"
 
-class Tetris
+Tetris::Tetris() : state(Settings::GameState::Menu),
+                   window(new NcursesWindow(state)),
+                   eventSystem(state),
+                   menu(state, eventSystem, window)
 {
-public:
-    Tetris() 
-    {
-        Draw::window(); // init
-    }
-    ~Tetris()
-    {
-        delete Draw::window();
-    }
+}
 
-public:
-    void run()
-    {
-        GameLoop::loop().menu();
-    }
-};
+Tetris::~Tetris()
+{
+    delete window;
+}
+
+void Tetris::run()
+{
+    eventSystem.runEventLoop();
+}
