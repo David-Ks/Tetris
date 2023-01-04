@@ -1,30 +1,26 @@
 #ifndef TETRIS_HPP
 #define TETRIS_HPP
 
-#include "src/Board/Board.hpp"
-#include "src/Players/Player.hpp"
-#include "src/Graphics/NcursesWindow.hpp"
+
+#include "Settings.hpp"
+#include "src/EventSystem/EventSystem.hpp"
+#include "src/Window/Output/NcursesWindow.hpp"
+#include "src/Menu/Menu.hpp"
 
 class Tetris
 {
 private:
-    static User::Player player;
-    static Board board;
-    static bool exit;
+    Settings::GameState state;
+    Window *window;
+    EventSystem eventSystem;
+    Menu menu;
 
 public:
-    static void quit();
+    Tetris();
+    ~Tetris();
     
-    static void menu();
-    static void game(const Draw::Window *window);
-
-private:
-    static void setPlayer(const Draw::Window *window);
-    static void settings(const Draw::Window *window);
-    static void records(const Draw::Window *window);
-
-private:
-    static bool isRunned();
+public:
+    void run();
 };
 
-#endif
+#endif // TETRIS_HPP

@@ -2,6 +2,8 @@
 
 int main()
 {
-    Tetris::menu();
+    Tetris game;
+    game.run();
+    
     return 0;
 }
